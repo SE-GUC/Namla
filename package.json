@@ -1,0 +1,21 @@
+{
+  "name": "20",
+  "version": "1.0.0",
+  "description": "image uploading",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "crypto": "^1.0.1",
+    "ejs": "^2.6.1",
+    "express": "^4.16.4",
+    "joi": "^14.3.1",
+    "morgan": "^1.9.1",
+    "multer": "^1.4.1",
+    "uuid": "^3.3.2"
+  }
+}
