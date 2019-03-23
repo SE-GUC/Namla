@@ -6,20 +6,11 @@ const router = express.Router();
 // Models
 const Faqsection = require('../../models/Faqsection');
 
-// temporary data created as if it was pulled out of the database ...
-// const questions = [
-// 	new ('aaaaa'),
-// 	new Question('bbbbb'),
-// 	new Question('ccccc'),
-// 	new Question('ddddd'),
-// 	new Question('eeeee')
-// ];
 
-// Instead of app use route
-// No need to write the full route
-// res.json() Automatically sends a status of 200
+const validator = require('../../models/Faqsection');
 
-// Get all users
+
+
 router.get('/', async (req, res) =>
 { 
 	const faqsection = await Faqsection.find();
@@ -32,7 +23,7 @@ router.get('/:id', async (req, res) =>
 	res.json({data:faqsection});
 });
 
-// Create a new user
+
 router.post('/', async (req, res) => {
 	const Question = req.body.question;
 
@@ -42,6 +33,7 @@ router.post('/', async (req, res) => {
 	const newQuestion = await Faqsection.create(req.body);
 	return res.json({ data: newQuestion });
 });
+
 
 router.put('/:id', async (req, res) => {
 	const Question = req.body.question;
@@ -61,6 +53,7 @@ router.delete('/:id', async (req, res) => {
 	const newQuestion = await Faqsection.findByIdAndDelete(id,req.body);
 	return res.json({ data: newQuestion });
 });
+
 
 
 module.exports = router;
