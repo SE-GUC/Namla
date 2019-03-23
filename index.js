@@ -8,9 +8,10 @@ mongoose
     .then(() => console.log('Connected to MongoDB'))
     .catch(err => console.log(err))
 
-const Admins = require('./routes/api/Admins')
-const RecruitmentForms = require('./routes/api/RecruitmentForms')
+
+// const RecruitmentForms = require('./routes/api/RecruitmentForms')
 const Carts = require('./routes/api/Carts')
+const Faqsection = require('./routes/api/Faqsection')
 
 const app = express()
 app.use(express.json())
@@ -20,8 +21,8 @@ app.use(express.json())
 // Direct routes to appropriate files 
 
 app.use('/api/Carts', Carts)
-app.use('/api/RecruitmentForms', RecruitmentForms)
-app.use('/api/Admins', Admins)
+// app.use('/api/RecruitmentFormss', RecruitmentForms)
+app.use('/api/Faqsection',Faqsection)
 
 // Handling 404
 app.use((req, res) => {
