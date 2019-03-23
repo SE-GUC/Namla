@@ -21,7 +21,12 @@ const app = express()
 app.use(express.json())
 
 
-
+app.get('/', (req, res) => {
+    res.send(`<h1>Welcome to the gallery</h1>
+    <a href="/api/users">Users</a>
+    <a href="/api/admins">admins</a>
+    `);
+  })
 // Direct routes to appropriate files 
 
 app.use('/api/Carts', Carts)
