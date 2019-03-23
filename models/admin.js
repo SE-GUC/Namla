@@ -1,12 +1,24 @@
-const uuid = require('uuid')
+const mongoose = require('mongoose')
+const Schema = mongoose.Schema
 
-// The User Model
-class admin {
-    constructor(name, age) {
-        this.name = name;
-        this.age = age;
-        this.id = uuid.v4();
-    };
-};
+// Create the schema
+const AdminSchema = new Schema({
+    name: {
+        type: String,
+        required: true
+    },
+    email: {
+        type: String,
+        required: true
+    },
+    password: {
+        type: String,
+        required: true
+    },
+    age: {
+        type: Number,
+        required: true
+    }
+})
 
-module.exports = admin
+module.exports = Admin = mongoose.model('Admin', AdminSchema)
