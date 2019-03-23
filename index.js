@@ -9,9 +9,23 @@ const products = require('./routes/api/products')
 
 const RecruitmentForms = require('./routes/api/RecruitmentForms')
 
+const Carts = require('./routes/api/Carts')
+const admins = require('./routes/api/admins')
+const users = require('./routes/api/users')
+
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'views'));
+
 
 const app = express()
 
+
+app.get('/gallery', (req, res) => {
+    res.send(`<h1>Welcome to the gallery</h1>
+    <a href="/api/users">Users</a>
+    <a href="/api/admins">admins</a>
+    `);
+  })
 
 const db = require('./config/keys').mongoURI
 
@@ -27,7 +41,7 @@ const db = require('./config/keys').mongoURI
 
 
 
-app.get('/', (req, res) => {
+app.get('/product', (req, res) => {
     res.send(`<h1>Welcome to our store</h1>
     `);
 })
@@ -35,6 +49,17 @@ app.get('/', (req, res) => {
 
 
 app.use('/api/RecruitmentForms', RecruitmentForms)
+
+
+app.use('/api/admins', admins)
+app.use('/api/users', users)
+app.use('/api/Admins', Admins)
+
+
+// Handling 404
+app.use((req, res) => {
+    res.status(404).send({err: 'We can not find what you are looking for'});
+ })
 
 
 
