@@ -1,13 +1,21 @@
-const uuid = require('uuid')
+const mongoose = require('mongoose')
+const Schema = mongoose.Schema
 
-class Cart {
-  constructor(id) {
-    this.id = id,
-    this.confirmed = false;
-    this.totalPrice = 0;
-    this.products = []
+// Create the schema
+const CartSchema = new Schema({
+    
+    
+    confirmed: {
+        type: Boolean,
+        required: true
+    },
+    totalPrice: {
+        type: Number, 
+        required: true
+    },
+    products: {
+        type: [String]
+    }
+})
 
-  }
-}
-
-module.exports = Cart;
+module.exports = Cart = mongoose.model('Cart', CartSchema)
