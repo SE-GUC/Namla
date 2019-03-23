@@ -16,7 +16,13 @@ mongoose
     .then(() => console.log('Connected to MongoDB'))
     .catch(err => console.log(err))
 
-// Init middleware
+
+
+const RecruitmentForms = require('./routes/api/RecruitmentForms')
+
+
+const app = express()
+
 app.use(express.json())
 app.use(express.urlencoded({extended: false}))
 
@@ -29,6 +35,8 @@ app.get('/test', (req,res) => res.send(`<h1>Deployed on Heroku</h1>`))
 app.use('/api/Announcement', Announcements)
 
 
+
+app.use('/api/RecruitmentForms', RecruitmentForms)
 
 app.use((req,res) => res.status(404).send(`<h1>Can not find what you're looking for</h1>`))
 
