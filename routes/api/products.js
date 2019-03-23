@@ -1,100 +1,59 @@
-// Import express
 const express = require('express')
-// Create the app
-const app = express()
-// Use it with post
-app.use(express.json())
+const router = express.Router()
+const mongoose = require('mongoose')
 
-// We will treat this array of Products as our database for now
-const Products = [
-    {
-        name:'Keychain',
-        type: 'Jewelery',
-        price: 50,
-        id: 1
-    },
-    {
-			name:'Bracelet',
-			type: 'Jewelery',
-			price: 20,
-			id: 2
-    },
-    {
-      name:'Tray',
-        type: 'Kitchenware',
-        price:75,
-        id: 3
-    },
-    {
-			name:'Jar',
-			type: 'Antique',
-			price: 100,
-			id: 4
-    },
-    {
-			name:'Pot',
-			type: 'Antique',
-			price: 90,
-			id: 5
-    },
-    {
-			name:'Lamp',
-			type: 'Lighting',
-			price: 150,
-			id: 6
-    },
-   
-]
+const Product = require('../../models/Product')
+const validator = require('../../validations/productValidations')
 
-
-
-// Get all books
-app.get('/api/Products', (req, res) => {
-	res.send(Products)
+router.get('/', async (req,res) => {
+    const products = await Product.find()
+    res.json(products)
 })
 
 
-
-// Get a certain Product
-app.get('/api/Products/:id', (req, res) => {
-    const PID = req.params.id
-    const Product = Products.find(Product => Product.id === PID)
-    res.send(Product)
+// Create a product
+router.post('/', async (req,res) => {
+   try {
+    const isValidated = validator.createValidation(req.body)
+    if (isValidated.error) return res.status(400).send({ error: isValidated.error.details[0].message })
+    const newProduct = await Product.create(req.body)
+    res.json({msg:'Product was created successfully', newProduct})
+   }
+   catch(error) {
+       // We will be handling the error later
+       console.log(error)
+   }  
 })
 
-// Create a Product
-app.post('/api/Products/', (req, res) => {
-    const name = req.body.title
-    const type = req.body.type
-    const price = req.body.price
-    
-    const Product = {
-        name: name,
-        type: type,
-        price: price,
-        id: Products.length + 1
+// Update a product
+router.put('/:id', async (req,res) => {
+    try {
+     const id = req.params.id
+     const product = await Product.findById(id)
+     if(!product) return res.status(404).send({error: 'Product does not exist'})
+     const isValidated = validator.updateValidation(req.body)
+     if (isValidated.error) return res.status(400).send({ error: isValidated.error.details[0].message })
+     const updatedProduct = await Product.findByIdAndUpdate(id,req.body)
+     res.json({msg: 'Product updated successfully'})
     }
-    Products.push(Product)
-    res.send(Products)
-})
+    catch(error) {
+        // We will be handling the error later
+        console.log(error)
+    }  
+ })
+
+ router.delete('/:id', async (req,res) => {
+    try {
+     const id = req.params.id
+     const deletedProduct = await Product.findByIdAndRemove(id)
+     res.json({msg:'Product was deleted successfully', deletedProduct})
+    }
+    catch(error) {
+        // We will be handling the error later
+        console.log(error)
+    }  
+ })
 
 
-// Update a Product's title
-app.put('/api/Products/:id', (req, res) => {
-    const PID = req.params.id 
-    const updatedPrice = req.body.price
-    const Product = Products.find(Product => Product.id === PID)
-    Product.price = updatedPrice
-    res.send(Products)
-})
 
-
-// Delete a Product
-app.delete('/api/Products/:id', (req, res) => {
-    const PID = req.params.id 
-    const Product = Products.find(Product => Product.id === PID)
-    const index = Products.indexOf(Product)
-    Products.splice(index,1)
-    res.send(Products)
-})
-
+module.exports = router
