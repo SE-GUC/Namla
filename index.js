@@ -11,6 +11,11 @@ mongoose
 
 const RecruitmentForms = require('./routes/api/RecruitmentForms')
 const Carts = require('./routes/api/Carts')
+const admins = require('./routes/api/admins')
+const users = require('./routes/api/users')
+
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'views'));
 
 const app = express()
 app.use(express.json())
@@ -21,6 +26,10 @@ app.use(express.json())
 
 app.use('/api/Carts', Carts)
 app.use('/api/RecruitmentForms', RecruitmentForms)
+app.use('/api/admins', admins)
+
+app.use('/api/users', users)
+
 
 // Handling 404
 app.use((req, res) => {
