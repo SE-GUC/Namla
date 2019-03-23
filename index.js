@@ -1,4 +1,5 @@
 const express = require('express')
+
 const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
 const uri = require('./config/keys_dev.js')
@@ -36,6 +37,9 @@ const products = require('./routes/api/products')
 
 const RecruitmentForms = require('./routes/api/RecruitmentForms')
 
+
+const bodyParser = require('body-parser');
+const TeamsController = require('./routes/api/TeamsController');
 const Carts = require('./routes/api/Carts')
 const admins = require('./routes/api/admins')
 const users = require('./routes/api/users')
@@ -50,6 +54,7 @@ const app = express()
 
 
 app.use(express.json())
+
 app.use(express.urlencoded({extended: false}))
 
 
@@ -61,6 +66,10 @@ app.get('/test', (req,res) => res.send(`<h1>Deployed on Heroku</h1>`))
 
 // Direct to Route Handlers
 app.use('/api/Announcement', Announcements)
+
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+
 
 app.get('/gallery', (req, res) => {
     res.send(`<h1>Welcome to the gallery</h1>
@@ -111,6 +120,9 @@ app.use('/api/Admins', Admins)
 //Route to teamcontroller
 app.use('/api/teams', TeamsController);
 
+
+//Route to teamcontroller
+app.use('/api/teams', TeamsController);
 
 // Handling 404
 app.use((req, res) => {

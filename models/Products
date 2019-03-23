@@ -1,0 +1,14 @@
+// The Products Model
+const uuid = require('uuid')
+const Joi = require('joi');
+
+
+class Products {
+    constructor(name, type, price,id ) {
+        this.name = name;
+        this.type = type;
+        this.price = price;
+        this.id = id };
+}
+
+module.exports = Products
