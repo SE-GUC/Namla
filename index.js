@@ -7,6 +7,9 @@ const products = require('./routes/api/products')
 
 
 
+const RecruitmentForms = require('./routes/api/RecruitmentForms')
+
+
 const app = express()
 
 
@@ -31,7 +34,8 @@ app.get('/', (req, res) => {
  app.use('/api/products', products)
 
 
- 
+app.use('/api/RecruitmentForms', RecruitmentForms)
+
 
 
 // Define the port, get it from the enviroment (used in production)
