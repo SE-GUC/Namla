@@ -8,7 +8,7 @@ mongoose
     .then(() => console.log('Connected to MongoDB'))
     .catch(err => console.log(err))
 
-const Admins = require('./routes/api/Admins')
+
 const RecruitmentForms = require('./routes/api/RecruitmentForms')
 const Carts = require('./routes/api/Carts')
 
@@ -21,7 +21,6 @@ app.use(express.json())
 
 app.use('/api/Carts', Carts)
 app.use('/api/RecruitmentForms', RecruitmentForms)
-app.use('/api/Admins', Admins)
 
 // Handling 404
 app.use((req, res) => {
