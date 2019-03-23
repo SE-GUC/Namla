@@ -1,24 +1,29 @@
-const uuid = require('uuid')
+const mongoose = require('mongoose')
+
+const Schema = mongoose.Schema
 
 
 
-// The confirmationmessage Model
+// Create the schema
 
-class confirmationmessage {
+const confirmationmessageSchema = new Schema({
 
-    constructor(content, to ) {
+    content: {
 
-        this.content = content;
+        type: String,
 
-        this.to = to;
+        required: true
 
-        this.id = uuid.v4();
+    },
 
-    };
+    to: {
 
-};
+        type: String,
 
+        required: true
 
+    },
 
-module.exports = confirmationmessage
+    
 
+})

@@ -40,36 +40,33 @@ const confirmationmessage = [
 
 
 // Create a new confirmationmessage
+router.post('/', async (req,res) => {
 
-router.post('/', (req, res) => {
+	try {
+ 
+	 
+		if (!content) return res.status(400).send({ err: 'content field is required' });
 
-	const content = req.body.content;
+		if (typeof content !== 'string') return res.status(400).send({ err: 'Invalid value for content' });
+	
+		if (!to) return res.status(400).send({ err: 'to field is required' });
+	
+		if (typeof to !== 'string') return res.status(400).send({ err: 'Invalid value for to' });
+	
+	 const newBook = await Book.create(req.body)
+ 
+	 res.json({msg:'Book was created successfully', data: newBook})
+ 
+	}
+ 
+	catch(error) {
+ 
+		// We will be handling the error later
+ 
+		console.log(error)
+ 
+	}
 
-	const to = req.body.to;
-
-
-
-	if (!content) return res.status(400).send({ err: 'content field is required' });
-
-	if (typeof content !== 'string') return res.status(400).send({ err: 'Invalid value for content' });
-
-	if (!to) return res.status(400).send({ err: 'to field is required' });
-
-	if (typeof to !== 'string') return res.status(400).send({ err: 'Invalid value for to' });
-
-
-
-	const newconfirmationmessage = {
-
-		content,
-
-		to,
-
-		id: uuid.v4(),
-
-	};
-
-	return res.json({ data: newconfirmationmessage });
 
 });
 
