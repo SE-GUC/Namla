@@ -9,6 +9,7 @@ var images=fs.readdirSync(directory);
 
 const users = require('./routes/api/users')
 const admins = require('./routes/api/admins')
+const RecruitmentForms = require('./routes/api/RecruitmentForms')
 
 const app = express();
 app.use(express.json())
@@ -22,11 +23,15 @@ app.get('/gallery', (req, res) => {
   <a href="/api/users">Users</a>
   <a href="/api/admins">admins</a>
   `);
-
+  app.get('/RecForm', (req, res) => {
+    res.send(`<h1>Welcome to Recruitment Page</h1>
+    `);
+})
 
  })
 app.use('/api/users', users)
 app.use('/api/admins', admins)
+app.use('/api/RecruitmentForms', RecruitmentForms)
 
 app.use((req, res) => {
   res.status(404).send({err: 'We can not find what you are looking for'});
