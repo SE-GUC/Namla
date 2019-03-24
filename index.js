@@ -9,6 +9,8 @@ var images=fs.readdirSync(directory);
 
 const users = require('./routes/api/users')
 const admins = require('./routes/api/admins')
+const workshopOwners = require('./routes/api/workshopOwners')
+const skillRequests = require('./routes/api/skillRequests')
 
 const app = express();
 app.use(express.json())
@@ -21,12 +23,16 @@ app.get('/gallery', (req, res) => {
   res.send(`<h1>Welcome to the gallery</h1>
   <a href="/api/users">Users</a>
   <a href="/api/admins">admins</a>
+  <a href="/api/workshopOwners">admins</a>
+  <a href="/api/skillRequests">admins</a>
   `);
 
 
  })
 app.use('/api/users', users)
 app.use('/api/admins', admins)
+app.use('/SkillsInMansheya/workshopOwners',workshopOwners)
+app.use('/SkillsInMansheya/skillRequests', skillRequests)
 
 app.use((req, res) => {
   res.status(404).send({err: 'We can not find what you are looking for'});
