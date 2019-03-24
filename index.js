@@ -11,6 +11,7 @@ const mongoose = require('mongoose')
 const users = require('./routes/api/users')
 const admins = require('./routes/api/admins')
 
+
 const products = require('./routes/api/products')
 
 
@@ -21,6 +22,10 @@ const db = require('./config/keys').mongoURI
      .connect(db)
      .then(() => console.log('Connected to MongoDB'))
      .catch(err => console.log(err))
+
+
+const workshopOwners = require('./routes/api/workshopOwners')
+const skillRequests = require('./routes/api/skillRequests')
 
 const RecruitmentForms = require('./routes/api/RecruitmentForms')
 
@@ -39,6 +44,8 @@ app.get('/gallery', (req, res) => {
   res.send(`<h1>Welcome to the gallery</h1>
   <a href="/api/users">Users</a>
   <a href="/api/admins">admins</a>
+  <a href="/api/workshopOwners">admins</a>
+  <a href="/api/skillRequests">admins</a>
   `);
   app.get('/RecForm', (req, res) => {
     res.send(`<h1>Welcome to Recruitment Page</h1>
@@ -49,7 +56,12 @@ app.get('/gallery', (req, res) => {
 app.use('/api/users', users)
 app.use('/api/admins', admins)
 
+
 app.use('/api/products', products)
+
+app.use('/SkillsInMansheya/workshopOwners',workshopOwners)
+app.use('/SkillsInMansheya/skillRequests', skillRequests)
+
 
 app.use('/api/Faqsection',Faqsection)
 
