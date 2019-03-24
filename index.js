@@ -10,6 +10,7 @@ const mongoose = require('mongoose')
 
 const users = require('./routes/api/users')
 const admins = require('./routes/api/admins')
+
 const products = require('./routes/api/products')
 
 
@@ -20,6 +21,11 @@ const db = require('./config/keys').mongoURI
      .connect(db)
      .then(() => console.log('Connected to MongoDB'))
      .catch(err => console.log(err))
+
+const RecruitmentForms = require('./routes/api/RecruitmentForms')
+
+const Faqsection = require('./routes/api/Faqsection')
+
 
 const app = express();
 app.use(express.json())
@@ -34,12 +40,22 @@ app.get('/gallery', (req, res) => {
   <a href="/api/users">Users</a>
   <a href="/api/admins">admins</a>
   `);
-
+  app.get('/RecForm', (req, res) => {
+    res.send(`<h1>Welcome to Recruitment Page</h1>
+    `);
+})
 
  })
 app.use('/api/users', users)
 app.use('/api/admins', admins)
+
 app.use('/api/products', products)
+
+app.use('/api/Faqsection',Faqsection)
+
+app.use('/api/RecruitmentForms', RecruitmentForms)
+
+
 
 app.use((req, res) => {
   res.status(404).send({err: 'We can not find what you are looking for'});
