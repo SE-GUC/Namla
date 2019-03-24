@@ -1,3 +1,11 @@
+const express = require('express')
+const mongoose = require('mongoose')
+
+// Require Router Handlers
+
+const Cart = require('./routes/api/Cart')
+
+
 const express = require('express');
 const multer = require('multer');
 const ejs = require('ejs');
@@ -35,11 +43,29 @@ const Faqsection = require('./routes/api/Faqsection')
 
 const app = express();
 app.use(express.json())
+
+ 
+
+const app = express()
+
+// DB Config
+const db = require('./config/keys').mongoURI
+
+// Connect to mongo
+mongoose
+    .connect(db)
+    .then(() => console.log('Connected to MongoDB'))
+    .catch(err => console.log(err))
+
+// Init middleware
+app.use(express.json())
+
 app.use(express.urlencoded({extended: false}))
 
-app.set('view engine', 'ejs');
 
-app.use(express.static('./public'));
+// Entry point
+app.get('/', (req,res) => res.send(`<h1>Book Store</h1>`))
+app.get('/test', (req,res) => res.send(`<h1>Deployed on Heroku</h1>`))
 
 app.get('/gallery', (req, res) => {
   res.send(`<h1>Welcome to the gallery</h1>
@@ -67,7 +93,9 @@ app.use('/SkillsInMansheya/skillRequests', skillRequests)
 
 app.use('/api/Faqsection',Faqsection)
 
-app.use('/api/RecruitmentForms', RecruitmentForms)
+// Direct to Route Handlers
+app.use('/api/Cart', Cart)
+
 
 
 
@@ -76,6 +104,7 @@ app.use((req, res) => {
 })
 
 
-const port = 3000;
+app.use((req,res) => res.status(404).send(`<h1>Can not find what you're looking for</h1>`))
 
-app.listen(port, () => console.log(`Server up and running on port ${port}`))
+const port = process.env.PORT || 3000
+app.listen(port, () => console.log(`Server on ${port}`))
