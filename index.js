@@ -9,9 +9,13 @@ var images=fs.readdirSync(directory);
 
 const users = require('./routes/api/users')
 const admins = require('./routes/api/admins')
+
+const workshopOwners = require('./routes/api/workshopOwners')
+const skillRequests = require('./routes/api/skillRequests')
 const RecruitmentForms = require('./routes/api/RecruitmentForms')
 
 const Faqsection = require('./routes/api/Faqsection')
+
 
 const app = express();
 app.use(express.json())
@@ -24,6 +28,8 @@ app.get('/gallery', (req, res) => {
   res.send(`<h1>Welcome to the gallery</h1>
   <a href="/api/users">Users</a>
   <a href="/api/admins">admins</a>
+  <a href="/api/workshopOwners">admins</a>
+  <a href="/api/skillRequests">admins</a>
   `);
   app.get('/RecForm', (req, res) => {
     res.send(`<h1>Welcome to Recruitment Page</h1>
@@ -33,9 +39,14 @@ app.get('/gallery', (req, res) => {
  })
 app.use('/api/users', users)
 app.use('/api/admins', admins)
+
+app.use('/SkillsInMansheya/workshopOwners',workshopOwners)
+app.use('/SkillsInMansheya/skillRequests', skillRequests)
+
 app.use('/api/Faqsection',Faqsection)
 
 app.use('/api/RecruitmentForms', RecruitmentForms)
+
 
 
 app.use((req, res) => {
