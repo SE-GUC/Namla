@@ -11,6 +11,7 @@ const mongoose = require('mongoose')
 const users = require('./routes/api/users')
 const admins = require('./routes/api/admins')
 
+const TeamsController = require('./routes/api/TeamsController')
 
 const products = require('./routes/api/products')
 
@@ -56,6 +57,7 @@ app.get('/gallery', (req, res) => {
 app.use('/api/users', users)
 app.use('/api/admins', admins)
 
+app.use('/api/teams', TeamsController);
 
 app.use('/api/products', products)
 
