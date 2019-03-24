@@ -25,16 +25,6 @@ const products = require('./routes/api/products')
 const Announcements = require('./routes/api/Announcement')
 
 
-
-const db = require('./config/keys').mongoURI
-
- // Connect to mongo
- mongoose
-     .connect(db)
-     .then(() => console.log('Connected to MongoDB'))
-     .catch(err => console.log(err))
-
-
 const workshopOwners = require('./routes/api/workshopOwners')
 const skillRequests = require('./routes/api/skillRequests')
 
@@ -43,21 +33,21 @@ const RecruitmentForms = require('./routes/api/RecruitmentForms')
 const Faqsection = require('./routes/api/Faqsection')
 
 
+const db = require('./config/keys').mongoURI
+
+
+
+
+
 const app = express();
 app.use(express.json())
 
  
 
-const app = express()
 
 // DB Config
 const db = require('./config/keys').mongoURI
 
-// Connect to mongo
-mongoose
-    .connect(db)
-    .then(() => console.log('Connected to MongoDB'))
-    .catch(err => console.log(err))
 
 // Init middleware
 app.use(express.json())
@@ -109,7 +99,6 @@ app.use((req, res) => {
 })
 
 
-app.use((req,res) => res.status(404).send(`<h1>Can not find what you're looking for</h1>`))
 
 const port = process.env.PORT || 3000
 app.listen(port, () => console.log(`Server on ${port}`))
