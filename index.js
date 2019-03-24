@@ -6,12 +6,27 @@ var fs=require('fs')
 var directory ="./public/uploads";
 var dirbuff=Buffer.from(directory);
 var images=fs.readdirSync(directory);
+const mongoose = require('mongoose')
 
 const users = require('./routes/api/users')
 const admins = require('./routes/api/admins')
 
+
+const products = require('./routes/api/products')
+
+
+const db = require('./config/keys').mongoURI
+
+ // Connect to mongo
+ mongoose
+     .connect(db)
+     .then(() => console.log('Connected to MongoDB'))
+     .catch(err => console.log(err))
+
+
 const workshopOwners = require('./routes/api/workshopOwners')
 const skillRequests = require('./routes/api/skillRequests')
+
 const RecruitmentForms = require('./routes/api/RecruitmentForms')
 
 const Faqsection = require('./routes/api/Faqsection')
@@ -19,6 +34,7 @@ const Faqsection = require('./routes/api/Faqsection')
 
 const app = express();
 app.use(express.json())
+app.use(express.urlencoded({extended: false}))
 
 app.set('view engine', 'ejs');
 
@@ -40,8 +56,12 @@ app.get('/gallery', (req, res) => {
 app.use('/api/users', users)
 app.use('/api/admins', admins)
 
+
+app.use('/api/products', products)
+
 app.use('/SkillsInMansheya/workshopOwners',workshopOwners)
 app.use('/SkillsInMansheya/skillRequests', skillRequests)
+
 
 app.use('/api/Faqsection',Faqsection)
 
