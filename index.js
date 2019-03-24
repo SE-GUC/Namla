@@ -10,6 +10,8 @@ var images=fs.readdirSync(directory);
 const users = require('./routes/api/users')
 const admins = require('./routes/api/admins')
 
+const Faqsection = require('./routes/api/Faqsection')
+
 const app = express();
 app.use(express.json())
 
@@ -27,6 +29,7 @@ app.get('/gallery', (req, res) => {
  })
 app.use('/api/users', users)
 app.use('/api/admins', admins)
+app.use('/api/Faqsection',Faqsection)
 
 app.use((req, res) => {
   res.status(404).send({err: 'We can not find what you are looking for'});
