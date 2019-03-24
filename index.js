@@ -22,6 +22,8 @@ const admins = require('./routes/api/admins')
 const TeamsController = require('./routes/api/TeamsController')
 
 const products = require('./routes/api/products')
+const Announcements = require('./routes/api/Announcement')
+
 
 
 const db = require('./config/keys').mongoURI
@@ -92,6 +94,9 @@ app.use('/SkillsInMansheya/skillRequests', skillRequests)
 
 
 app.use('/api/Faqsection',Faqsection)
+
+app.use('/api/RecruitmentForms', RecruitmentForms)
+app.use('/api/Announcement', Announcements)
 
 // Direct to Route Handlers
 app.use('/api/Cart', Cart)
