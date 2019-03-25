@@ -1,4 +1,3 @@
-const express = require('express')
 const mongoose = require('mongoose')
 
 // Require Router Handlers
@@ -14,7 +13,8 @@ var fs=require('fs')
 var directory ="./public/uploads";
 var dirbuff=Buffer.from(directory);
 var images=fs.readdirSync(directory);
-const mongoose = require('mongoose')
+const app = express();
+
 
 const users = require('./routes/api/users')
 const admins = require('./routes/api/admins')
@@ -33,9 +33,9 @@ const RecruitmentForms = require('./routes/api/RecruitmentForms')
 const Faqsection = require('./routes/api/Faqsection')
 
 
-const confirmationmessage = require('./routes/api/confirmationmessage')
+const confirmationmessages = require('./routes/api/confirmationmessages')
 
-app.use('/api/confirmationmessage', confirmationmessage)
+
 
 const db = require('./config/keys').mongoURI
 
@@ -49,39 +49,47 @@ app.set('views', path.join(__dirname, 'views'));
 
 
 
-const app = express();
 app.use(express.json())
 
  
 
 
 // DB Config
-const db = require('./config/keys').mongoURI
 
 
 // Init middleware
-app.use(express.json())
 
 app.use(express.urlencoded({extended: false}))
 
 
 // Entry point
-app.get('/', (req,res) => res.send(`<h1>Book Store</h1>`))
+//app.get('/', (req,res) => res.send(`<h1>Book Store</h1>`))
 app.get('/test', (req,res) => res.send(`<h1>Deployed on Heroku</h1>`))
 
 app.get('/gallery', (req, res) => {
   res.send(`<h1>Welcome to the gallery</h1>
-  <a href="/api/users">Users</a>
-  <a href="/api/admins">admins</a>
-  <a href="/api/workshopOwners">admins</a>
-  <a href="/api/skillRequests">admins</a>
+  <a href="/api/users">Users to get the gallery</a>
+  <a href="/api/admins">Admins gallery</a>
   `);
-  app.get('/RecForm', (req, res) => {
-    res.send(`<h1>Welcome to Recruitment Page</h1>
-    `);
-})
 
  })
+ app.get('/RecForm', (req, res) => {
+  res.send(`<h1>Welcome to Recruitment Page</h1>
+  `);
+})
+
+
+app.get('/workshopOwners', (req, res) => {
+  res.send(`<h1>Welcome to workshop Owners Page</h1>
+  `);
+})
+
+app.get('/skill Requests', (req, res) => {
+  res.send(`<h1>Welcome to skill Requests Page</h1>
+  `);
+})
+
+
 app.use('/api/users', users)
 app.use('/api/admins', admins)
 
@@ -97,13 +105,14 @@ app.use('/api/Faqsection',Faqsection)
 
 app.use('/api/RecruitmentForms', RecruitmentForms)
 app.use('/api/Announcement', Announcements)
+app.use('/api/confirmationmessages', confirmationmessages)
+
 
 
 // Direct to Route Handlers
 app.use('/api/Cart', Cart)
 
 
-app.use('/api/confirmationmessage', confirmationmessage)
 
 
 app.use((req, res) => {

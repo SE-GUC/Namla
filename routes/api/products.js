@@ -46,7 +46,7 @@ router.put('/:id', async (req,res) => {
     try {
      const id = req.params.id
      const deletedProduct = await Product.findByIdAndRemove(id)
-     res.json({msg:'Product was deleted successfully', deletedProduct})
+     res.json({msg:'Product was deleted successfully'})
     }
     catch(error) {
         // We will be handling the error later

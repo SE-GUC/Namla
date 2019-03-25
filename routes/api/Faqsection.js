@@ -24,20 +24,6 @@ router.put('/:id', async (req, res) => {
 	return res.json({ data: newQuestion });
 });
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 router.delete('/:id', async (req, res) => {
 
 	const id=req.params.id;
