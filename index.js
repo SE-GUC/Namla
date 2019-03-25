@@ -13,6 +13,8 @@ const admins = require('./routes/api/admins')
 
 
 const products = require('./routes/api/products')
+const Announcements = require('./routes/api/Announcement')
+
 
 
 const db = require('./config/keys').mongoURI
@@ -66,6 +68,7 @@ app.use('/SkillsInMansheya/skillRequests', skillRequests)
 app.use('/api/Faqsection',Faqsection)
 
 app.use('/api/RecruitmentForms', RecruitmentForms)
+app.use('/api/Announcement', Announcements)
 
 
 
