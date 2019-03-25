@@ -31,6 +31,8 @@ const skillRequests = require('./routes/api/skillRequests')
 const RecruitmentForms = require('./routes/api/RecruitmentForms')
 
 const Faqsection = require('./routes/api/Faqsection')
+const Faqsection2 = require('./routes/api/Faqsection2')
+
 
 
 const confirmationmessages = require('./routes/api/confirmationmessages')
@@ -102,6 +104,7 @@ app.use('/SkillsInMansheya/skillRequests', skillRequests)
 
 
 app.use('/api/Faqsection',Faqsection)
+app.use('/api/Faqsection2',Faqsection2)
 
 app.use('/api/RecruitmentForms', RecruitmentForms)
 app.use('/api/Announcement', Announcements)
