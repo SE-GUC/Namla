@@ -39,7 +39,13 @@ app.use('/api/confirmationmessage', confirmationmessage)
 
 const db = require('./config/keys').mongoURI
 
+mongoose
+    .connect(db)
+    .then(() => console.log('Connected to MongoDB'))
+    .catch(err => console.log(err))
 
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'views'));
 
 
 
