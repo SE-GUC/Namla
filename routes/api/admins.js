@@ -88,7 +88,9 @@ router.get('/pics',(req,res)=>{
     console.log('after');
 });
 
-
+//app.get("/pics", (req, res) => {
+  //res.sendFile(path.join(__dirname, "./uploads/"));
+//});
 
 
 router.delete('/api/delete/:id',(req,res)=>{

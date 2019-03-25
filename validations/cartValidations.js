@@ -3,8 +3,9 @@ const Joi = require('joi')
 module.exports = {
     createValidation: request => {
         const createSchema = {
-            title: Joi.string(),
-            details: Joi.string()
+            confirmed: Joi.boolean(),
+            totalPrice: Joi.number()
+            
            
         }
 
@@ -13,8 +14,10 @@ module.exports = {
 
     updateValidation: request => {
         const updateSchema = {
-            title: Joi.string(),
-            details: Joi.string()
+            confirmed: Joi.boolean(),
+            totalprice: Joi.number()
+            
+            
         }
 
         return Joi.validate(request, updateSchema)
