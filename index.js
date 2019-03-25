@@ -33,6 +33,10 @@ const RecruitmentForms = require('./routes/api/RecruitmentForms')
 const Faqsection = require('./routes/api/Faqsection')
 
 
+const confirmationmessage = require('./routes/api/confirmationmessage')
+
+app.use('/api/confirmationmessage', confirmationmessage)
+
 const db = require('./config/keys').mongoURI
 
 
@@ -92,6 +96,7 @@ app.use('/api/Announcement', Announcements)
 app.use('/api/Cart', Cart)
 
 
+app.use('/api/confirmationmessage', confirmationmessage)
 
 
 app.use((req, res) => {
