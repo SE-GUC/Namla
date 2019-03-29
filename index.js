@@ -32,6 +32,8 @@ const RecruitmentForms = require('./routes/api/RecruitmentForms')
 
 const Faqsection = require('./routes/api/Faqsection')
 const Faqsection2 = require('./routes/api/Faqsection2')
+const NebnyAdmins = require('./routes/api/NebnyAdmins')
+const NebnyUsers = require('./routes/api/NebnyUsers')
 
 
 
@@ -109,6 +111,8 @@ app.use('/api/Faqsection2',Faqsection2)
 app.use('/api/RecruitmentForms', RecruitmentForms)
 app.use('/api/Announcement', Announcements)
 app.use('/api/confirmationmessages', confirmationmessages)
+app.use('/api/NebnyAdmins', NebnyAdmins)
+app.use('/api/NebnyUsers', NebnyUsers)
 
 
 
