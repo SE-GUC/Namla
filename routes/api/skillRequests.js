@@ -2,6 +2,8 @@ const express = require('express')
 const router = express.Router()
 const mongoose = require('mongoose')
 
+const NebnyUser = require('../../models/NebnyUser')
+
 const SkillRequest = require ('../../models/SkillRequest');
 const validator = require('../../validations/SkillRequestValidations')
 
@@ -14,6 +16,7 @@ router.get('/', async (req,res) => {
     const SkillRequests = await SkillRequest.find()
     res.json({data: SkillRequests})
 })
+
 
 router.post('/;id1', async (req,res) => {
     try {

@@ -10,6 +10,10 @@ const SkillRequestSchema = new Schema({
     id: {
         type: Number,
         required: true
+    },
+    NebnyUser: {
+        type: Schema.Types.ObjectId,
+        ref: 'NebnyUser'
     }
 })
 
