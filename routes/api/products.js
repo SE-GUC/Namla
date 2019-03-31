@@ -3,9 +3,7 @@ const router = express.Router()
 const mongoose = require('mongoose')
  
 const Product = require('../../models/Product')
-const NebnyAdmin = require('../../models/NebnyAdmin')
 const validator = require('../../validations/productValidations')
-
 
 router.get('/', async (req,res) => {
     const products = await Product.find()
@@ -14,18 +12,10 @@ router.get('/', async (req,res) => {
 
 
 // Create a product
-router.post('/:id', async (req,res) => {
+router.post('/', async (req,res) => {
    try {
-
-    const NebnyAdminn = await NebnyAdmin.findById(req.params.id)
-    if(!NebnyAdminn) return res.status(404).send({error: 'NebnyAdmin not found'})
-
-    if(!NebnyAdminn.type==="EE Member") return res.status(404).send({error: 'Not EE Membery'})
-
-
     const isValidated = validator.createValidation(req.body)
     if (isValidated.error) return res.status(400).send({ error: isValidated.error.details[0].message })
-
     const newProduct = await Product.create(req.body)
     res.json({msg:'Product was created successfully', newProduct})
    }
@@ -36,12 +26,8 @@ router.post('/:id', async (req,res) => {
 })
 
 // Update a product
-router.put('/:id/:id1', async (req,res) => {
+router.put('/:id', async (req,res) => {
     try {
-        const NebnyAdminn = await NebnyAdmin.findById(req.params.id1)
-        if(!NebnyAdminn) return res.status(404).send({error: 'NebnyAdmin not found'})      
-    
-    
      const id = req.params.id
      const product = await Product.findById(id)
      if(!product) return res.status(404).send({error: 'Product does not exist'})
@@ -56,12 +42,8 @@ router.put('/:id/:id1', async (req,res) => {
     }  
  })
 
- router.delete('/:id;id1', async (req,res) => {
-    try {   
-         const NebnyAdminn = await NebnyAdmin.findById(req.params.id1)
-        if(!NebnyAdminn) return res.status(404).send({error: 'NebnyAdmin not found'})      
-    
-    
+ router.delete('/:id', async (req,res) => {
+    try {
      const id = req.params.id
      const deletedProduct = await Product.findByIdAndRemove(id)
      res.json({msg:'Product was deleted successfully'})
