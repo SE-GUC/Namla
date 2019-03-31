@@ -2,13 +2,13 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
 // Create the schema
-const AnnouncementSchema = new Schema({
-    title: {
+const MSchema = new Schema({
+    content: {
         type: String,
         required: true
     },
-    details: {
-        type: String,
+    to: {
+        type: String, 
         required: true
     },
     NebnyAdmin: {
@@ -16,5 +16,4 @@ const AnnouncementSchema = new Schema({
         ref: 'NebnyAdmin'
     }
 })
-
-module.exports = Announcement = mongoose.model('Announcements', AnnouncementSchema)
+module.exports = confirmationmessage = mongoose.model('confirmationmessage',MSchema)
