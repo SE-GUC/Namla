@@ -64,7 +64,7 @@ app.use(express.urlencoded({extended: false}))
 
 
 // Entry point
-//app.get('/', (req,res) => res.send(`<h1>Book Store</h1>`))
+app.get('/', (req,res) => res.send(`<h1>WELCOME </h1>`))
 app.get('/test', (req,res) => res.send(`<h1>Deployed on Heroku</h1>`))
 
 app.get('/gallery', (req, res) => {
