@@ -2,6 +2,8 @@ const express = require('express')
 const router = express.Router()
 const mongoose = require('mongoose')
 
+const NebnyUser = require('../../models/NebnyUser')
+
 const SkillRequest = require ('../../models/SkillRequest');
 const validator = require('../../validations/SkillRequestValidations')
 
@@ -15,8 +17,12 @@ router.get('/', async (req,res) => {
     res.json({data: SkillRequests})
 })
 
-router.post('/', async (req,res) => {
+router.post('/:id', async (req,res) => {
     try {
+        const NebnyUserr  = await NebnyUser.findById(req.params.id)
+        if(!NebnyUserr ) return res.status(404).send({error: 'NebnyUser not found'})
+
+
      const isValidated = validator.createValidation(req.body)
      if (isValidated.error) return res.status(400).send({ error: isValidated.error.details[0].message })
      var newS= {

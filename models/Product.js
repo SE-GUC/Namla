@@ -15,6 +15,10 @@ const ProductSchema = new Schema({
         type: Number,
         required: true
     },
+    NebnyAdmin: {
+        type: Schema.Types.ObjectId,
+        ref: 'NebnyAdmin'
+    }
 })
 
 module.exports = Product = mongoose.model('products', ProductSchema)
