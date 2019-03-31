@@ -12,6 +12,8 @@ const router = express.Router();
 const admin = require('../../models/admin');
 const user = require('../../models/user');
 
+
+
 // Set The Storage Engine
 const storage = multer.diskStorage({
   destination: './public/uploads/',
@@ -57,6 +59,7 @@ app.use(express.static('./public'));
 router.get('/', (req, res) => res.render('index'));
 
 router.post('/upload', (req, res) => {
+  
   upload(req, res, (err) => {
     if(err){
       res.render('index', {
