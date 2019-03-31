@@ -41,7 +41,7 @@ router.put('/:id', async (req,res) => {
         console.log(error)
     }  
  })
-
+   // delete a suggestionbox
  router.delete('/:id', async (req,res) => {
     try {
      const id = req.params.id
