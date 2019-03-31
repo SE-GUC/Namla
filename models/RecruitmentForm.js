@@ -22,6 +22,14 @@ const RecruitmentFormSchema = new Schema({
     InterviewTime: {
         type: String, 
         required: true
+    },
+    NebnyUser: {
+        type: Schema.Types.ObjectId,
+        ref: 'NebnyUser'
+    },
+    NebnyAdmin: {
+        type: Schema.Types.ObjectId,
+        ref: 'NebnyAdmin'
     }
 })
 module.exports = RecruitmentForm = mongoose.model('RecruitmentForm',RecruitmentFormSchema)

@@ -12,8 +12,11 @@ router.get('/', async (req,res) => {
 
 
 // Create a product
-router.post('/', async (req,res) => {
+router.post('/;id1', async (req,res) => {
    try {
+    const NebnyAdminn = await NebnyAdmin.findById(req.params.id1)
+    if(!NebnyAdminn) return res.status(404).send({error: 'NebnyAdmin not found'})      
+
     const isValidated = validator.createValidation(req.body)
     if (isValidated.error) return res.status(400).send({ error: isValidated.error.details[0].message })
     const newProduct = await Product.create(req.body)
@@ -26,8 +29,12 @@ router.post('/', async (req,res) => {
 })
 
 // Update a product
-router.put('/:id', async (req,res) => {
+router.put('/:id/:id1', async (req,res) => {
     try {
+        const NebnyAdminn = await NebnyAdmin.findById(req.params.id1)
+        if(!NebnyAdminn) return res.status(404).send({error: 'NebnyAdmin not found'})      
+    
+    
      const id = req.params.id
      const product = await Product.findById(id)
      if(!product) return res.status(404).send({error: 'Product does not exist'})
@@ -42,11 +49,15 @@ router.put('/:id', async (req,res) => {
     }  
  })
 
- router.delete('/:id', async (req,res) => {
-    try {
+ router.delete('/:id;id1', async (req,res) => {
+    try {   
+         const NebnyAdminn = await NebnyAdmin.findById(req.params.id1)
+        if(!NebnyAdminn) return res.status(404).send({error: 'NebnyAdmin not found'})      
+    
+    
      const id = req.params.id
      const deletedProduct = await Product.findByIdAndRemove(id)
-     res.json({msg:'Product was deleted successfully', deletedProduct})
+     res.json({msg:'Product was deleted successfully'})
     }
     catch(error) {
         // We will be handling the error later

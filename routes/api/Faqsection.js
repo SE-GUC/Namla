@@ -13,6 +13,7 @@ const validator = require('../../models/Faqsection');
 
 
 router.put('/:id', async (req, res) => {
+	
 	const QQ=req.body.question;
 	const Question = req.body.question;
 	const Answer = req.body.answer;
@@ -23,20 +24,6 @@ router.put('/:id', async (req, res) => {
 	const newQuestion = await Faqsection.findByIdAndUpdate(id,req.body);
 	return res.json({ data: newQuestion });
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 router.delete('/:id', async (req, res) => {
 

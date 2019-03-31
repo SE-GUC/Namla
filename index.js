@@ -1,4 +1,3 @@
-const express = require('express')
 const mongoose = require('mongoose')
 
 // Require Router Handlers
@@ -12,8 +11,11 @@ const Cart = require('./routes/api/Cart')
 //const path = require('path');
 var fs=require('fs')
 var directory ="./public/uploads";
-//var dirbuff=Buffer.from(directory);
-//var images=fs.readdirSync(directory);
+
+var dirbuff=Buffer.from(directory);
+var images=fs.readdirSync(directory);
+const app = express();
+
 
 const users = require('./routes/api/users')
 const admins = require('./routes/api/admins')
@@ -24,53 +26,71 @@ const products = require('./routes/api/products')
 const Announcements = require('./routes/api/Announcement')
 
 
-
-const db = require('./config/keys').mongoURI
-
- // Connect to mongo
- mongoose
-     .connect(db)
-     .then(() => console.log('Connected to MongoDB'))
-     .catch(err => console.log(err))
-
-
 const workshopOwners = require('./routes/api/workshopOwners')
 const skillRequests = require('./routes/api/skillRequests')
 
 const RecruitmentForms = require('./routes/api/RecruitmentForms')
 
 const Faqsection = require('./routes/api/Faqsection')
+const Faqsection2 = require('./routes/api/Faqsection2')
+const NebnyAdmins = require('./routes/api/NebnyAdmins')
+const NebnyUsers = require('./routes/api/NebnyUsers')
 
 
-const app = express();
+
+const confirmationmessages = require('./routes/api/confirmationmessages')
+
+
+const db = require('./config/keys').mongoURI
+
+mongoose
+    .connect(db)
+    .then(() => console.log('Connected to MongoDB'))
+    .catch(err => console.log(err))
+
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'views'));
+
+
+
 app.use(express.json())
 
  
 
 
 // Init middleware
-app.use(express.json())
 
 app.use(express.urlencoded({extended: false}))
 
 
 // Entry point
-app.get('/', (req,res) => res.send(`<h1>Book Store</h1>`))
+//app.get('/', (req,res) => res.send(`<h1>Book Store</h1>`))
 app.get('/test', (req,res) => res.send(`<h1>Deployed on Heroku</h1>`))
 
 app.get('/gallery', (req, res) => {
   res.send(`<h1>Welcome to the gallery</h1>
-  <a href="/api/users">Users</a>
-  <a href="/api/admins">admins</a>
-  <a href="/api/workshopOwners">admins</a>
-  <a href="/api/skillRequests">admins</a>
+  <a href="/api/users">Users to get the gallery</a>
+  <a href="/api/admins">Admins gallery</a>
   `);
-  app.get('/RecForm', (req, res) => {
-    res.send(`<h1>Welcome to Recruitment Page</h1>
-    `);
-})
 
  })
+ app.get('/RecForm', (req, res) => {
+  res.send(`<h1>Welcome to Recruitment Page</h1>
+  `);
+})
+
+
+app.get('/workshopOwners', (req, res) => {
+  res.send(`<h1>Welcome to workshop Owners Page</h1>
+  `);
+})
+
+app.get('/skill Requests', (req, res) => {
+  res.send(`<h1>Welcome to skill Requests Page</h1>
+  `);
+})
+
+
 app.use('/api/users', users)
 app.use('/api/admins', admins)
 
@@ -83,9 +103,14 @@ app.use('/SkillsInMansheya/skillRequests', skillRequests)
 
 
 app.use('/api/Faqsection',Faqsection)
+app.use('/api/Faqsection2',Faqsection2)
 
 app.use('/api/RecruitmentForms', RecruitmentForms)
 app.use('/api/Announcement', Announcements)
+app.use('/api/confirmationmessages', confirmationmessages)
+app.use('/api/NebnyAdmins', NebnyAdmins)
+app.use('/api/NebnyUsers', NebnyUsers)
+
 
 
 // Direct to Route Handlers
@@ -99,7 +124,6 @@ app.use((req, res) => {
 })
 
 
-app.use((req,res) => res.status(404).send(`<h1>Can not find what you're looking for</h1>`))
 
 const port = process.env.PORT || 3000
 app.listen(port, () => console.log(`Server on ${port}`))
