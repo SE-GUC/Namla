@@ -5,12 +5,13 @@ const mongoose = require('mongoose')
 const Cart = require('./routes/api/Cart')
 
 
-const express = require('express');
-const multer = require('multer');
-const ejs = require('ejs');
-const path = require('path');
+
+//const multer = require('multer');
+//const ejs = require('ejs');
+//const path = require('path');
 var fs=require('fs')
 var directory ="./public/uploads";
+
 var dirbuff=Buffer.from(directory);
 var images=fs.readdirSync(directory);
 const app = express();
@@ -32,11 +33,12 @@ const RecruitmentForms = require('./routes/api/RecruitmentForms')
 
 const Faqsection = require('./routes/api/Faqsection')
 const Faqsection2 = require('./routes/api/Faqsection2')
+const NebnyAdmins = require('./routes/api/NebnyAdmins')
+const NebnyUsers = require('./routes/api/NebnyUsers')
 
 
 
 const confirmationmessages = require('./routes/api/confirmationmessages')
-
 
 
 const db = require('./config/keys').mongoURI
@@ -54,9 +56,6 @@ app.set('views', path.join(__dirname, 'views'));
 app.use(express.json())
 
  
-
-
-// DB Config
 
 
 // Init middleware
@@ -109,6 +108,8 @@ app.use('/api/Faqsection2',Faqsection2)
 app.use('/api/RecruitmentForms', RecruitmentForms)
 app.use('/api/Announcement', Announcements)
 app.use('/api/confirmationmessages', confirmationmessages)
+app.use('/api/NebnyAdmins', NebnyAdmins)
+app.use('/api/NebnyUsers', NebnyUsers)
 
 
 

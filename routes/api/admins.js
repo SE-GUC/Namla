@@ -9,8 +9,10 @@ var images=fs.readdirSync(directory);
 const Joi = require('joi');
 const uuid = require('uuid');
 const router = express.Router();
-const admin = require('../../models/admin');
+const NebnyAdmin = require('../../models/NebnyAdmin');
 const user = require('../../models/user');
+
+
 
 // Set The Storage Engine
 const storage = multer.diskStorage({
@@ -57,6 +59,7 @@ app.use(express.static('./public'));
 router.get('/', (req, res) => res.render('index'));
 
 router.post('/upload', (req, res) => {
+  
   upload(req, res, (err) => {
     if(err){
       res.render('index', {
@@ -93,7 +96,9 @@ router.get('/pics',(req,res)=>{
 //});
 
 
-router.delete('/api/delete/:id',(req,res)=>{
+router.delete('/api/delete/:id:id1',async(req,res)=>{
+  const Nebnyadmin = await NebnyAdmin.findById(req.params.id)
+  if(!Nebnyadmin) return res.status(404).send({error: 'Nebnyadmin not found'})
     const imagename=req.params.id
 
 

@@ -11,6 +11,10 @@ const AnnouncementSchema = new Schema({
         type: String,
         required: true
     },
+    NebnyAdmin: {
+        type: Schema.Types.ObjectId,
+        ref: 'NebnyAdmin'
+    }
 })
 
 module.exports = Announcement = mongoose.model('Announcements', AnnouncementSchema)

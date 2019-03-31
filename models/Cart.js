@@ -7,14 +7,16 @@ const CartSchema = new Schema({
     
     confirmed: {
         type: Boolean,
-        required: true
+        default: false
     },
     totalPrice: {
-        type: Number, 
-        required: true
+        type: Number,
+        default: 0
+        
     },
     products: {
-        type: [String]
+        type: [mongoose.Schema.Types.ObjectId],
+        ref: 'Product'
     }
 })
 
