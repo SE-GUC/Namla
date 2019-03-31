@@ -6,15 +6,14 @@ const mongoose = require('mongoose')
 const Cart = require('./routes/api/Cart')
 
 
-const express = require('express');
-const multer = require('multer');
-const ejs = require('ejs');
-const path = require('path');
+
+//const multer = require('multer');
+//const ejs = require('ejs');
+//const path = require('path');
 var fs=require('fs')
 var directory ="./public/uploads";
-var dirbuff=Buffer.from(directory);
-var images=fs.readdirSync(directory);
-const mongoose = require('mongoose')
+//var dirbuff=Buffer.from(directory);
+//var images=fs.readdirSync(directory);
 
 const users = require('./routes/api/users')
 const admins = require('./routes/api/admins')
@@ -48,16 +47,6 @@ app.use(express.json())
 
  
 
-const app = express()
-
-// DB Config
-const db = require('./config/keys').mongoURI
-
-// Connect to mongo
-mongoose
-    .connect(db)
-    .then(() => console.log('Connected to MongoDB'))
-    .catch(err => console.log(err))
 
 // Init middleware
 app.use(express.json())
