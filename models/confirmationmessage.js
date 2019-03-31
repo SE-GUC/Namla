@@ -10,6 +10,10 @@ const MSchema = new Schema({
     to: {
         type: String, 
         required: true
+    },
+    NebnyAdmin: {
+        type: Schema.Types.ObjectId,
+        ref: 'NebnyAdmin'
     }
 })
 module.exports = confirmationmessage = mongoose.model('confirmationmessage',MSchema)
