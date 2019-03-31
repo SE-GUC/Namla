@@ -4,13 +4,15 @@ const mongoose = require('mongoose')
 const validator = require('../../validations/FormValidations')
 
 const RecruitmentForm = require('../../models/RecruitmentForm')
+const NebnyUser = require('../../models/NebnyUser')
+const NebnyAdmin = require('../../models/NebnyAdmin')
 
 router.get('/', async (req,res) => {
     const Forms = await RecruitmentForm.find()
     res.json({data: Forms})
 })
 
-//Get certain Admin
+//Get certain Form
 router.get("/:id",async (req, res) => {
     const FormId = req.params.id;
     const neededForm = await RecruitmentForm.findById(FormId)
@@ -18,8 +20,12 @@ router.get("/:id",async (req, res) => {
   });
 
 // Create a Form
-router.post('/', async (req,res) => {
+router.post('/:id', async (req,res) => {
    try {
+
+    const NebnyUserr = await NebnyUser.findById(req.params.id)
+    if(!NebnyUserr) return res.status(404).send({error: 'NebnyUser not found'})
+
     const isValidated = validator.createValidation(req.body)
     if (isValidated.error) return res.status(400).send({ error: isValidated.error.details[0].message })
     const newForm = await RecruitmentForm.create(req.body)
@@ -32,8 +38,12 @@ router.post('/', async (req,res) => {
 })
 
 // Update a Form
-router.put('/update/:id', async (req,res) => {
+router.put('/update/:id1/:id', async (req,res) => {
     try {
+
+     const NebnyUserr = await NebnyUser.findById(req.params.id1)
+     if(!NebnyUserr) return res.status(404).send({error: 'NebnyUser not found'})   
+     
      const id = req.params.id
      const { ClientName, address, age,InterviewDate ,InterviewTime }  = req.body
 
@@ -52,11 +62,18 @@ router.put('/update/:id', async (req,res) => {
     }  
  })
 
- router.delete('/:id', async (req,res) => {
+ router.delete('/:id1/:id', async (req,res) => {
     try {
+
+     const NebnyAdminn = await NebnyAdmin.findById(req.params.id1)
+     const RF = await RecruitmentForm.findById(req.params.id)
+     if(!NebnyAdminn) return res.status(404).send({error: 'NebnyAdmin not found'})      
+     if(!RF) return res.status(404).send({error: 'Form not found'})
      const id = req.params.id
      const deletedForm = await RecruitmentForm.findByIdAndRemove(id)
-     res.json({msg:'Form was deleted successfully', data: deletedForm})
+    //  res.json({msg:'Form was deleted successfully', data: deletedForm})
+     res.json({msg:'Form was deleted successfully'})
+
     }
     catch(error) {
         // We will be handling the error later
