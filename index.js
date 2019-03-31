@@ -35,7 +35,7 @@ const Faqsection = require('./routes/api/Faqsection')
 const Faqsection2 = require('./routes/api/Faqsection2')
 const NebnyAdmins = require('./routes/api/NebnyAdmins')
 const NebnyUsers = require('./routes/api/NebnyUsers')
-
+const suggestionBox= require('./routes/api/suggestionbox')
 
 
 const confirmationmessages = require('./routes/api/confirmationmessages')
@@ -110,6 +110,7 @@ app.use('/api/Announcement', Announcements)
 app.use('/api/confirmationmessages', confirmationmessages)
 app.use('/api/NebnyAdmins', NebnyAdmins)
 app.use('/api/NebnyUsers', NebnyUsers)
+app.use('/api/suggestionbox', suggestionBox)
 
 
 
