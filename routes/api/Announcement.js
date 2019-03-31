@@ -22,7 +22,7 @@ router.post('/:id1', async (req,res) => {
     const isValidated = validator.createValidation(req.body)
     if (isValidated.error) return res.status(400).send({ error: isValidated.error.details[0].message })
     const Ann = await Announcemenet.create(req.body)
-    res.json({msg:'Announcement was created successfully', Ann})
+    res.json({msg:'Announcement was created successfully', data:Ann})
    }
    catch(error) {
        // We will be handling the error later
@@ -40,8 +40,8 @@ router.put('/:id/:id1', async (req,res) => {
      if(!Ann) return res.status(404).send({error: 'Announcement does not exist'})
      const isValidated = validator.updateValidation(req.body)
      if (isValidated.error) return res.status(400).send({ error: isValidated.error.details[0].message })
-     const updatedAnn = await Announcemenet.findByIdAndUpdate(id,req.body)
-     res.json({msg: 'Announcement updated successfully'})
+     const updatedAnn = await Announcemenet.findOneAndUpdate({'_id':id},req.body,{new:true})
+     res.json({msg: 'Announcement updated successfully',data:updatedAnn})
     }
     catch(error) {
         // We will be handling the error later
@@ -55,7 +55,7 @@ router.put('/:id/:id1', async (req,res) => {
         if(!Nebnyadmin) return res.status(404).send({error: 'Nebnyadmin not found'})
         const id = req.params.id
      const deletedAnn = await Announcemenet.findByIdAndRemove(id)
-     res.json({msg:'Announcemnet was deleted successfully', deletedAnn})
+     res.json({msg:'Announcemnet was deleted successfully', data:deletedAnn})
     }
     catch(error) {
         // We will be handling the error later
