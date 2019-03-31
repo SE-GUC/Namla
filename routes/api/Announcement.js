@@ -4,8 +4,6 @@ const mongoose = require('mongoose')
 
 const Announcemenet = require('../../models/Announcement')
 const validator = require('../../validations/AnnoValidations')
-const NebnyAdmin = require('../../models/NebnyAdmin')
-
 
 router.get('/', async (req,res) => {
     const Ann = await Announcemenet.find()
@@ -14,11 +12,8 @@ router.get('/', async (req,res) => {
 
 
 // Create 
-router.post('/:id1', async (req,res) => {
+router.post('/', async (req,res) => {
    try {
-    const Nebnyadmin = await NebnyAdmin.findById(req.params.id1)
-    if(!Nebnyadmin) return res.status(404).send({error: 'Nebnyadmin not found'})
-
     const isValidated = validator.createValidation(req.body)
     if (isValidated.error) return res.status(400).send({ error: isValidated.error.details[0].message })
     const Ann = await Announcemenet.create(req.body)
@@ -31,11 +26,9 @@ router.post('/:id1', async (req,res) => {
 })
 
 // Update 
-router.put('/:id/:id1', async (req,res) => {
+router.put('/:id', async (req,res) => {
     try {
-        const Nebnyadmin = await NebnyAdmin.findById(req.params.id1)
-        if(!Nebnyadmin) return res.status(404).send({error: 'Nebnyadmin not found'})
-        const id = req.params.id
+     const id = req.params.id
      const Ann = await Announcemenet.findByIdAndUpdate(id)
      if(!Ann) return res.status(404).send({error: 'Announcement does not exist'})
      const isValidated = validator.updateValidation(req.body)
@@ -49,11 +42,9 @@ router.put('/:id/:id1', async (req,res) => {
     }  
  })
 
- router.delete('/:id/:id1', async (req,res) => {
+ router.delete('/:id', async (req,res) => {
     try {
-        const Nebnyadmin = await NebnyAdmin.findById(req.params.id1)
-        if(!Nebnyadmin) return res.status(404).send({error: 'Nebnyadmin not found'})
-        const id = req.params.id
+     const id = req.params.id
      const deletedAnn = await Announcemenet.findByIdAndRemove(id)
      res.json({msg:'Announcemnet was deleted successfully', deletedAnn})
     }

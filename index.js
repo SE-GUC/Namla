@@ -5,12 +5,13 @@ const mongoose = require('mongoose')
 const Cart = require('./routes/api/Cart')
 
 
-const express = require('express');
-const multer = require('multer');
-const ejs = require('ejs');
-const path = require('path');
+
+//const multer = require('multer');
+//const ejs = require('ejs');
+//const path = require('path');
 var fs=require('fs')
 var directory ="./public/uploads";
+
 var dirbuff=Buffer.from(directory);
 var images=fs.readdirSync(directory);
 const app = express();
@@ -40,7 +41,6 @@ const suggestionBox= require('./routes/api/suggestionbox')
 const confirmationmessages = require('./routes/api/confirmationmessages')
 
 
-
 const db = require('./config/keys').mongoURI
 
 mongoose
@@ -56,9 +56,6 @@ app.set('views', path.join(__dirname, 'views'));
 app.use(express.json())
 
  
-
-
-// DB Config
 
 
 // Init middleware
