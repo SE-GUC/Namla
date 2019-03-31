@@ -1,20 +1,34 @@
-const functions = require('./fn')
-const cart = require('./models/Cart')
-const product = require('./models/Product')
-test("update cart", async () =>{
-    expect.assertions(1)
-    const cart = await functions.createCart()
-    const product = await functions.createProduct()
-    await functions.updateCart(cart.data.data._id,product.data.newProduct._id)
-    const gCart = await functions.getCart(cart.data.data._id)
-    expect(gCart.data.products).toContainEqual(product.data.newProduct._id) 
-})
+const funcs = require('./productFN');
+const express = require('express')
+const mongoose = require('mongoose')
+const passport = require('passport')
+const cors = require('cors')
 
-test("delete",async () =>{
-    expect.assertions(1)
-    const cart = await functions.createCart()
-    const product = await functions.createProduct()
-    await functions.deleteProduct(cart.data.data._id,product.data.newProduct._id)
-    const gCart = await functions.getCart(cart.data.data._id)
-    expect(gCart.data.products).not.toContainEqual(product.data.newProduct._id) 
-})
+const products = [
+    'pot',
+    'cup',
+    'bracelet',
+    'lamp',
+    'scarf',
+  ];
+  
+  test('The list of products has pot on it', () => {
+    expect(products).toContain('pot');
+  });
+
+
+//Working with async
+test('reading a product', async () => {
+await funcs.getProduct()
+});
+  test('deleting a product', async () => {
+  await funcs.deleteProduct()
+});
+  test('updating a product', async () => {
+  await funcs.updateProduct()
+});
+  test('creating a product', async () => {
+    await funcs.createProduct()
+});    
+
+

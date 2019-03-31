@@ -1,0 +1,20 @@
+const functions = require('./fn')
+const cart = require('./models/Cart')
+const product = require('./models/Product')
+test("update cart", async () =>{
+    expect.assertions(1)
+    const cart = await functions.createCart()
+    const product = await functions.createProduct()
+    await functions.updateCart(cart.data.data._id,product.data.newProduct._id)
+    const gCart = await functions.getCart(cart.data.data._id)
+    expect(gCart.data.products).toContainEqual(product.data.newProduct._id) 
+})
+
+test("delete",async () =>{
+    expect.assertions(1)
+    const cart = await functions.createCart()
+    const product = await functions.createProduct()
+    await functions.deleteProduct(cart.data.data._id,product.data.newProduct._id)
+    const gCart = await functions.getCart(cart.data.data._id)
+    expect(gCart.data.products).not.toContainEqual(product.data.newProduct._id) 
+})
