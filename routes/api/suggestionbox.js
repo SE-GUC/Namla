@@ -33,7 +33,8 @@ router.put('/:id', async (req,res) => {
     //  if(!subox) return res.status(404).send({error: 'suggestion box does not exist'})
     //  const isValidated = validator.updateValidation(req.body)
     //  if (isValidated.error) return res.status(400).send({ error: isValidated.error.details[0].message })
-     const updatedSuggestionbox = await sbox.findByIdAndUpdate(id,req.body)
+
+    const updatedSuggestionbox = await sbox.findOneAndUpdate({'_id':id},req.body,{new:true})
      res.json({msg: ' suggestion box updated successfully',updatedSuggestionbox})
     }
     catch(error) {

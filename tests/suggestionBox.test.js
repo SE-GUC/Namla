@@ -1,30 +1,42 @@
  const suggestionBox = require('./suggestionBox')
  
  test ('creating new suggestion box', async()=>{
-     const suggestionBox={
+     const suggestionbox={
          comment: "ay haga "
      }
-     const createdsuggestionBox= await suggestionBox.createSuggestionBox(suggestionBox)
+     const createdsuggestionBox= await suggestionBox.createSuggestionBox(suggestionbox)
       const actual = createdsuggestionBox.data.data
-      expect(actual).toMatchObject(suggestionBox)
+      expect.assertions(1)
+      expect(actual).toMatchObject(suggestionbox)
       
     })
       
  test ('updating the suggestion box', async()=>{
-     const suggestionBox={
-         comment: "ay hagaa "
+     const testCreat={
+         comment: "ana gamed"
      }
-     const updatedsuggestionBox= await suggestionBox.updatedsuggestionBox(suggestionBox)
-      const updating= updatedsuggestionBox.data.data
-      expect(updating).toMatchObject(suggestionBox)
-
+    const createdsuggestionBox= await suggestionBox.createSuggestionBox(testCreat)
+    const actual = createdsuggestionBox.data.data
+    const createdID=actual['_id']
+    const updateData= {
+         comment:"ana gamed fash5"
+     }
+     const updatedsuggestionBox= await suggestionBox.UpdatesuggestionBox(createdID,updateData)
+      const updating= updatedsuggestionBox.data.updatedSuggestionbox
+      expect.assertions(1)
+      expect(updating).toMatchObject(updateData)
  })
- test (' deleting the suggestion box', async()=>{
-     const suggestionBox={
-         comment: "ay haaga "
-     }
-     const deletedsuggestionBox = await suggestionBox.deletedsuggestionBox(suggestionBox)
+
+ test ('deleting the suggestion box', async()=>{
+    const testCreat={
+        comment: "ana gamed"
+    }
+    const createdsuggestionBox= await suggestionBox.createSuggestionBox(testCreat)
+    const actual = createdsuggestionBox.data.data
+    const createdID=actual['_id']
+    
+    const deletedsuggestionBox= await suggestionBox.deletesuggestionBox(createdID)
      const deleting= deletedsuggestionBox.data.data
-     expect(deleting).toMatchObject(suggestionBox)
-
- })
+     expect.assertions(1)
+     expect(deleting).toMatchObject(testCreat)
+})
