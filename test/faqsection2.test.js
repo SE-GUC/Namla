@@ -47,7 +47,7 @@ test("Getall FAQ",async () => {
     const id=createdData["_id"]
     const update={
         answer:"bye",
-        question:"Hello?"       }
+        question:"Helloo?"       }
     const updated =await FAQ.updateFAQ(id,update);
     const updatedData=updated.data.data
    
