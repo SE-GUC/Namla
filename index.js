@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-
+const cors = require('cors')
 // Require Router Handlers
 
 const Cart = require('./routes/api/Cart')
@@ -15,7 +15,7 @@ var directory ="./public/uploads";
 var dirbuff=Buffer.from(directory);
 var images=fs.readdirSync(directory);
 const app = express();
-
+app.use(cors())
 
 const users = require('./routes/api/users')
 const admins = require('./routes/api/admins')

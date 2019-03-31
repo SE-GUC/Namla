@@ -4,7 +4,7 @@ const Joi = require("joi");
 
 const router = express.Router();
 const mongoose = require('mongoose')
-const Product = require("../../models/Product")
+
 
 // Models
 const Cart = require("../../models/Cart");
@@ -19,14 +19,15 @@ const validator = require('../../validations/cartValidations')
 // Get all users
 router.get("/", (req, res) => res.json({ data: Cart }));
 
-router.get("/:id",async (req, res) => {
-  const cart = await Cart.findById(req.params.id);
+router.get("/:id", (req, res) => {
+  const Cart = Cart.find(c => c.id === parseInt(req.params.id));
 
-  if (!cart) return res.status(404).send(`There is no Cart with such id`);
+  if (!Cart) return res.status(404).send(`There is no Cart with such id`);
 
-  res.send(cart);
+  res.send(Cart);
 });
 
+// Create a new user
 router.post('/', async (req,res) => {
   try {
    const isValidated = validator.createValidation(req.body)
@@ -39,38 +40,15 @@ router.post('/', async (req,res) => {
       console.log(error)
   }  
 })
-router.put('/:id/:productId', async (req,res) => {
+router.put('/:id', async (req,res) => {
   try {
    const id = req.params.id
-   const productId = req.params.productId
-   const product = Product.findById(productId)
-   if(!product) return res.status(404).send({error: 'Product does not exist'})
-   const cart = await Cart.findById(id)
-
+   const cart = await Cart.findOne({id})
    if(!cart) return res.status(404).send({error: 'Cart does not exist'})
-  // const isValidated = validator.updateValidation(req.body)
-   //if (isValidated.error) return res.status(400).send({ error: isValidated.error.details[0].message })
-   const cart1 = await Cart.findByIdAndUpdate(id,{$push:{products: productId}})
-   
-   //const cart2 = await Cart.findByIdAndUpdate(id,{totalPrice: cart.totalPrice + product.price })
-   
+   const isValidated = validator.updateValidation(req.body)
+   if (isValidated.error) return res.status(400).send({ error: isValidated.error.details[0].message })
+   const updatedCart = await Cart.updateOne(req.body)
    res.json({msg: 'Cart updated successfully'})
-  }
-  catch(error) {
-      // We will be handling the error later
-      console.log(error)
-  }  
-})
-router.delete('/:id/:productId', async (req,res) => {
-  try {
-    const productId = req.params.productId
-   const id = req.params.id
-   const cart = await Cart.findById(id)
-   if (cart.products.indexOf(productId)>-1) {
-     const cart1 = await Cart.findByIdAndUpdate(id,{$pull:{products: productId}}, {new: true})
-     
-    }
-   res.json({msg:'Product was deleted successfully', data: cart})
   }
   catch(error) {
       // We will be handling the error later
@@ -79,20 +57,14 @@ router.delete('/:id/:productId', async (req,res) => {
 })
 router.delete('/:id', async (req,res) => {
   try {
-    
    const id = req.params.id
-   let cart = await Cart.findById(id)
-   
-    cart = await Cart.findByIdAndUpdate(id,{$set:{products: []}})
-     
-    
-   res.json({msg:'Cart is empty successfully', data: cart})
+   const deletedCart = await Cart.findByIdAndRemove(id)
+   res.json({msg:'Cart was deleted successfully', data: deletedCart})
   }
   catch(error) {
       // We will be handling the error later
       console.log(error)
   }  
 })
-
 
 module.exports = router;
