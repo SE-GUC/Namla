@@ -13,7 +13,6 @@ const validator = require('../../models/Faqsection');
 
 
 router.put('/:id', async (req, res) => {
-	
 	const QQ=req.body.question;
 	const Question = req.body.question;
 	const Answer = req.body.answer;
