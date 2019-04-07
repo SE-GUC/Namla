@@ -1,5 +1,7 @@
 const mongoose = require('mongoose')
-
+const cors = require('cors')
+const express = require('express')
+const app = express(); 
 // Require Router Handlers
 
 const Cart = require('./routes/api/Cart')
@@ -15,7 +17,7 @@ var directory ="./public/uploads";
 var dirbuff=Buffer.from(directory);
 var images=fs.readdirSync(directory);
 const app = express();
-
+app.use(cors())
 
 const users = require('./routes/api/users')
 const admins = require('./routes/api/admins')
@@ -64,7 +66,7 @@ app.use(express.urlencoded({extended: false}))
 
 
 // Entry point
-//app.get('/', (req,res) => res.send(`<h1>Book Store</h1>`))
+app.get('/', (req,res) => res.send(`<h1>WELCOME </h1>`))
 app.get('/test', (req,res) => res.send(`<h1>Deployed on Heroku</h1>`))
 
 app.get('/gallery', (req, res) => {
@@ -126,5 +128,5 @@ app.use((req, res) => {
 
 
 
-const port = process.env.PORT || 3000
+const port = process.env.PORT || 5000
 app.listen(port, () => console.log(`Server on ${port}`))
