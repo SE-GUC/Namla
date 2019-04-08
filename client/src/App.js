@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Faqsection from './components/Faqsection'
 import './App.css';
 import Form from './components/Form.js';
 import Postrec from './components/Postrec';
@@ -34,10 +35,15 @@ AddFAQ = (title) => {
   this.setState({Faqsection2 : [...this.state.Faqsection2,newFaqsection2]});
 }
 
+
 class App extends Component {
   render() {
     return (
       <div className="App">
+
+
+      <Faqsection />
+
       <div>Recruitment Form</div>
         <Form onChange={fields => this.onChange(fields)}/>
         <p>

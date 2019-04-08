@@ -4,7 +4,8 @@ const Schema = mongoose.Schema
 // Create the schema
 const UserSchema = new Schema({
     answer: {
-        type: String
+        type: String,
+        required:true
     },
     question: {
         type: String,
