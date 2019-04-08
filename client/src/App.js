@@ -1,26 +1,11 @@
 import React, { Component } from 'react';
-// import logo from './logo.svg';
 import './App.css';
 import Form from './components/Form.js';
 import Postrec from './components/Postrec';
-
-
-
+import { BrowserRouter as Router, Route } from 'react-router-dom'
+import Child from './components/child'
+import Confmsg from './components/Confmsg'
 class App extends Component {
-
-  state = {
-    fields: {}
-  };
-
-  onChange = updatedValue => {
-    this.setState({
-      fields: {
-        ...this.state.fields,
-        ...updatedValue
-      }
-    });
-  };
-
   render() {
     return (
       <div className="App">
@@ -36,6 +21,10 @@ class App extends Component {
       <div className="App">
       <Confmsg/>
       </div>
+
+        <Router>
+          <Route path="/child" component={Child}/>
+        </Router>
       </div>
       
     );
