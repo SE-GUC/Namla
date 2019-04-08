@@ -11,8 +11,8 @@ const busboyBodyParser = require('busboy-body-parser');
 
 
 const path = require('path');
-
-
+var fs=require('fs')
+var directory ="./public/uploads";
 const app = express();
 app.use(cors())
 app.use(passport.initialize())
@@ -29,10 +29,11 @@ const Faqsection2 = require('./routes/api/Faqsection2')
 const NebnyAdmins = require('./routes/api/NebnyAdmins')
 const NebnyUsers = require('./routes/api/NebnyUsers')
 const suggestionBox= require('./routes/api/suggestionbox')
-const Cart = require('./routes/api/Cart')
+const Cart= require('./routes/api/Cart')
+
+
 const confirmationmessages = require('./routes/api/confirmationmessages')
 const gallery = require('./routes/api/gallery')
-
 
 const db = require('./config/keys').mongoURI
 
@@ -49,13 +50,6 @@ app.set('views', path.join(__dirname, 'views'));
 app.use(express.json())
 app.use(express.urlencoded({extended: false}))
 
-
-app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
-  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-  next();
-});
 app.use(busboyBodyParser({ limit: '50mb' }));  
 
 app.use(function(req, res, next) { //allow cross origin requests
@@ -117,5 +111,5 @@ app.use((req,res) => res.status(404).send(`<h1>Can not find what you're looking 
 
 
 
-const port = process.env.PORT || 3000
+const port = process.env.PORT || 5000
 app.listen(port, () => console.log(`Server on ${port}`))
