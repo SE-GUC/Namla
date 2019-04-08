@@ -1,14 +1,17 @@
 const mongoose = require('mongoose')
+const express = require('express')
 const cors = require('cors')
+const path = require('path')
+
 // Require Router Handlers
 
 const Cart = require('./routes/api/Cart')
 
 
-const express = require('express');
+
 //const multer = require('multer');
 //const ejs = require('ejs');
-const path = require('path');
+//const path = require('path');
 var fs=require('fs')
 var directory ="./public/uploads";
 
