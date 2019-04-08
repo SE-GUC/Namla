@@ -2,19 +2,18 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
 // Create the schema
-const RecruitmentFormSchema = new Schema({
+const MSchema = new Schema({
     content: {
         type: String,
         required: true
     },
     to: {
-        type: String,
+        type: String, 
         required: true
     },
-   
-    NebnyAdmin : {
+    NebnyAdmin: {
         type: Schema.Types.ObjectId,
         ref: 'NebnyAdmin'
     }
 })
-module.exports = RecruitmentForm = mongoose.model('RecruitmentForm',RecruitmentFormSchema)
+module.exports = confirmationmessage = mongoose.model('confirmationmessage',MSchema)
