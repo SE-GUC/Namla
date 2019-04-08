@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 // import logo from './logo.svg';
 import './App.css';
 import Form from './components/Form.js';
+import Postrec from './components/Postrec';
+
 
 
 class App extends Component {
@@ -27,7 +29,15 @@ class App extends Component {
         <p>
           {JSON.stringify(this.state.fields,null,2)}
         </p>
+        <p>to post </p>
+        <div className="Post">
+      <Postrec/>
       </div>
+      <div className="App">
+      <Confmsg/>
+      </div>
+      </div>
+      
     );
   }
 }
