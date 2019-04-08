@@ -1,25 +1,32 @@
 import React, { Component } from 'react';
-import suggestionbox from './components/suggestionbox '
+// import logo from './logo.svg';
 import './App.css';
+import Form from './components/Form.js';
+
 
 class App extends Component {
+
+  state = {
+    fields: {}
+  };
+
+  onChange = updatedValue => {
+    this.setState({
+      fields: {
+        ...this.state.fields,
+        ...updatedValue
+      }
+    });
+  };
+
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+      <div>Recruitment Form</div>
+        <Form onChange={fields => this.onChange(fields)}/>
+        <p>
+          {JSON.stringify(this.state.fields,null,2)}
+        </p>
       </div>
     );
   }
