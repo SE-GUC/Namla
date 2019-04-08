@@ -1,168 +1,152 @@
-const express = require("express");
-const router = express.Router();
+const express = require('express')
+const router = express.Router()
+
 const mongoose = require("mongoose");
-const multer = require('multer');
-const gallery = require("../../models/gallery");
+const fs = require('fs');
+const Grid = require("gridfs-stream");
+const fileType = require('file-type');
+const assert=require('assert');
+GridStore = require('mongodb').GridStore
 
-const storage = multer.diskStorage({
-  destination: function(req, file, cb) {
-    cb(null, './uploads/');
-  },
-  filename: function(req, file, cb) {
-    cb(null, new Date().toISOString() + file.originalname);
-  }
-});
+ const validator = require('../../validations/imageValidations')
 
-const fileFilter = (req, file, cb) => {
-  // reject a file
-  if (file.mimetype === 'image/jpeg' || file.mimetype === 'image/png') {
-    cb(null, true);
-  } else {
-    cb(null, false);
-  }
-};
+const Files = require('../../models/GALLERY');
+const conn = mongoose.connection;
+    Grid.mongo = mongoose.mongo;
+    let gfs;
 
-const upload = multer({
-  storage: storage,
-  limits: {
-    fileSize: 1024 * 1024 * 5
-  },
-  fileFilter: fileFilter
-});
+    conn.once("open", () => {
+        gfs = Grid(conn.db);
 
 
-router.get("/", (req, res, next) => {
-  gallery.find()
-    .select("name _id productImage")
-    .exec()
-    .then(docs => {
-      const response = {
-        count: gallery.length,
-        gallery: gallery.map(doc => {
-          return {
-            name: gallery.name,
-            productImage: gallery.productImage,
-            _id: gallery._id,
-            request: {
-              type: "GET",
-              url: "http://localhost:3000/gallery/" + doc._id
-            }
-          };
+
+
+
+    router.get('/home', (req, res) => {
+            gfs.files.find().toArray(function(err,files){
+                if(files.length === 0){
+                    return res.status(400).send({message:'there is no images to show'});
+        
+                }
+                console.log(files);
+                let data=[];
+                let readstream =gfs.createReadStream({
+                    filename:files[0].filename
+                })
+                readstream.on('data',function(chunk){
+                    data.push(chunk);
+                });
+                readstream.on('end',function(){
+                    
+                    res.json({
+                        success: true,
+                        files
+                    })
+                                });
+                readstream.on('error',function(err)
+                {
+                    console.log('an error occured!',err);
+                    throw err;
+                })
+            })
+        
         })
-      };
-      res.status(200).json(response);
+        
+        
+        
 
-    })
-    .catch(err => {
-      console.log(err);
-      res.status(500).json({
-        error: err
-      });
-    });
-});
+        
+    router.get('/download/:imgname',(req,res)=>{
+   
+            gfs.files.find({filename:req.params.imgname}).toArray(function(err,files){
+        if(files.length === 0){
+            return res.status(400).send({message:'file not found'});
 
-router.post("/", upload.single('productImage'), (req, res, next) => {
-  const gallery = new gallery({
-    _id: new mongoose.Types.ObjectId(),
-    name: req.body.name,
-    productImage: req.file.path 
-  });
-  gallery
-    .save()
-    .then(result => {
-      console.log(result);
-      res.status(201).json({
-        message: "Created product successfully",
-        createdProduct: {
-            name: result.name,
-            _id: result._id,
-            request: {
-                type: 'GET',
-                url: "http://localhost:3000/gallery/" + result._id
-            }
         }
-      });
+        console.log(files);
+        let data=[];
+        let readstream =gfs.createReadStream({
+            filename:files[0].filename
+        })
+        readstream.on('data',function(chunk){
+            data.push(chunk);
+        });
+        readstream.on('end',function(){
+            data=Buffer.concat(data);
+            let img ='data:image/png;base64,'+Buffer(data).toString('base64');
+            res.end(img);
+        });
+        readstream.on('error',function(err)
+        {
+            console.log('an error occured!',err);
+            throw err;
+        })
     })
-    .catch(err => {
-      console.log(err);
-      res.status(500).json({
-        error: err
-      });
-    });
+
+        })
+
+
+ 
+ 
+    router.delete('/delete2/:id',(req,res)=>{
+    const imagename=req.params.id
+    gfs.files.find({filename:imagename}).toArray(function(err,files){
+        if(err){
+                    return res.status(400).send({message:'file not found'});
+                }
+                else if(files.length===0){return res.json({error:'cannot find this pic'})}
+                else{
+                console.log(files)
+                gfs.remove({filename:imagename},function(err){
+                res.json({done:'done deletion this pic'})
+})
+                }
+})
+        })
+
+
+
+
+    router.post('/upload', (req, res) => {
+            let {
+                file
+            } = req.files;
+
+            let writeStream = gfs.createWriteStream({
+                filename: `${file.name}`,
+                mode: 'w',
+                content_type: file.mimetype
+            });
+            writeStream.on('close', function (uploadedFile) {
+                const isValidated = validator.createValidation(uploadedFile.body)
+                if (isValidated.error) return res.status(400).send({ error: isValidated.error.details[0].message })
+               
+                Files.insertMany({
+                        length: uploadedFile.length,
+                        name: uploadedFile.filename,
+                        type: uploadedFile.contentType,
+                       
+
+                    })
+                    .then(file => res.json({
+                        success: true,
+                        message: "File was saved with success"
+                    }))
+                    .catch(err => {
+                        res.status(500).json({
+                            message: `[*] Error while uploading new files, with error: ${err}`
+                        })
+                    })
+            });
+            writeStream.write(file.data);
+             writeStream.end();
+        });
+
+    
+
+
 });
+ module.exports = router;
 
-// router.get("/:productId", (req, res, next) => {
-//   const id = req.params.productId;
-//   Product.findById(id)
-//     .select('name price _id productImage')
-//     .exec()
-//     .then(doc => {
-//       console.log("From database", doc);
-//       if (doc) {
-//         res.status(200).json({
-//             product: doc,
-//             request: {
-//                 type: 'GET',
-//                 url: 'http://localhost:3000/products'
-//             }
-//         });
-//       } else {
-//         res
-//           .status(404)
-//           .json({ message: "No valid entry found for provided ID" });
-//       }
-//     })
-//     .catch(err => {
-//       console.log(err);
-//       res.status(500).json({ error: err });
-//     });
-// });
 
-// router.patch("/:productId", (req, res, next) => {
-//   const id = req.params.productId;
-//   const updateOps = {};
-//   for (const ops of req.body) {
-//     updateOps[ops.propName] = ops.value;
-//   }
-//   Product.update({ _id: id }, { $set: updateOps })
-//     .exec()
-//     .then(result => {
-//       res.status(200).json({
-//           message: 'Product updated',
-//           request: {
-//               type: 'GET',
-//               url: 'http://localhost:3000/products/' + id
-//           }
-//       });
-//     })
-//     .catch(err => {
-//       console.log(err);
-//       res.status(500).json({
-//         error: err
-//       });
-//     });
-// });
-
-// router.delete("/:productId", (req, res, next) => {
-//   const id = req.params.productId;
-//   Product.remove({ _id: id })
-//     .exec()
-//     .then(result => {
-//       res.status(200).json({
-//           message: 'Product deleted',
-//           request: {
-//               type: 'POST',
-//               url: 'http://localhost:3000/products',
-//               body: { name: 'String', price: 'Number' }
-//           }
-//       });
-//     })
-//     .catch(err => {
-//       console.log(err);
-//       res.status(500).json({
-//         error: err
-//       });
-//     });
-// });
-
-module.exports = router;
+    
