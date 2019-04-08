@@ -1,14 +1,16 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom'
-import Child from './components/child'
+import './App.css';
+import Announcement from './components/Announcement'
 
 class App extends Component {
   render() {
     return (
       <div className="App">
-        <Router>
-          <Route path="/child" component={Child}/>
-        </Router>
+        <header className="App-header">
+        
+          <Announcement/>
+
+        </header>
       </div>
     );
   }
