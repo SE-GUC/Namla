@@ -1,7 +1,7 @@
 {
   "name": "namla",
   "version": "1.0.0",
-  "description": "nebny-guc",
+  "description": "",
   "main": "index.js",
   "directories": {
     "test": "tests"
@@ -20,7 +20,6 @@
   },
   "homepage": "https://github.com/SE-GUC/Namla#readme",
   "dependencies": {
-    "bcrypt": "^3.0.5",
     "bcryptjs": "^2.4.3",
     "busboy-body-parser": "^0.3.2",
     "cors": "^2.8.5",
