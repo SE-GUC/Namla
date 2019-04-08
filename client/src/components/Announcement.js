@@ -26,7 +26,7 @@ export default class Announcement extends Component {
   delete(id){
     return fetch('/api/Announcement/'+id, {
       method: 'DELETE',
-     // body: JSON.stringify(databody),
+      //body: JSON.stringify(databody),
       headers: {
           'Content-Type': 'application/json'
       },
