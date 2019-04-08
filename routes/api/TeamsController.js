@@ -27,7 +27,7 @@ router.get('/:id', async (req, res) => {
 router.put('/:id', async (req, res) => {
     var id = req.params.id;
     var child = await Child.findById(id)
-    if (req.body.team !== '') { child.teamId = req.body.team }
+    if (req.body.team !== '') { child.team = req.body.team }
     if (req.body.name !== '') { child.name = req.body.name }
     if (req.body.age !== 0) { child.age = req.body.age }
     if (req.body.familyStatus !== '') { child.familyStatus = req.body.familyStatus }
@@ -53,10 +53,10 @@ router.post('/createTeam', async (req, res) => {
     res.send(team)
 })
 
-// router.get('/', async (req, res) => {
-//     var children = await Child.find()
-//     res.send(children)
-// })
+router.get('/', async (req, res) => {
+    var children = await Child.find()
+    res.send(children)
+})
 
 // router.get('/get/:id', async (req, res) => {
 //     var id = req.params.id
