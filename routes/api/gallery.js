@@ -52,7 +52,29 @@ const conn = mongoose.connection;
         
         })
         
-        
+        //  router.get('/home', (req, res) => {
+        //     Files.find()
+        //         .exec()
+        //         .then(files => {
+        //             let uploadedFiles = files.map(file => ({
+        //                 file_name: file.name,
+        //                 file_id:  file.doc_id,
+        //                 file_type: file.type,
+        //                 file_link: `http://${req.headers.host}/v1/bucket/download?document_id=${file.doc_id}`
+        //             }));
+        //             res.json({
+        //                 success: true,
+        //                 uploadedFiles
+        //             })
+        //         })
+        //         .catch(err => {
+        //             logger.error(`[*] Error, while getting all uploaded file, with error:  ${err}`);
+        //             res.status(400).send({
+        //                 message: `Error, while getting all uploaded file, with error: ${err}`
+        //             });
+        //         });
+        // });
+
         
 
         

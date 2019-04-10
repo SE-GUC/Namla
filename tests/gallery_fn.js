@@ -54,7 +54,7 @@ const functions = {
     },
     DeleteanImage: async() => {
         try{
-            const response = await fetch(`http://localhost:5000/api/gallery/delete/Windows_10_LogoBlue.svg-copy_WINDOWS-720x340.jpg`,{
+            const response = await fetch('http://localhost:5000/api/gallery/delete/Windows_10_LogoBlue.svg-copy_WINDOWS-720x340.jpg',{
                 method: 'DELETE'
     //here i should post a photo and then get it's imagename and send it
     //but since posting an image is not working at all so i put the it manually 

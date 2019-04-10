@@ -27,14 +27,14 @@ test('Get All images data but not there base64 string', async()=>{
 
     expect.assertions(1);
     const response = await functions.getAllImages();
-    expect(response).toBeDefined()
+    expect(response).toBeDefined();
 
 });
 test('Delete an image ', async()=>{
 
     expect.assertions(1);
     const response = await functions.DeleteanImage();
-    expect(response).toEqual({done:'done deletion this pic'})
+    expect(response).toEqual({done:'done deletion this pic'});
     //here i should post a photo and then get it's imagename and send it
     //but since posting an image is not working at all so i put the it manually 
     //so to be sure we can post an image manually then get it's name an put it in the lonk untill i do the post test 
