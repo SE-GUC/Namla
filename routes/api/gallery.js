@@ -74,7 +74,8 @@ const conn = mongoose.connection;
         readstream.on('end',function(){
             data=Buffer.concat(data);
             let img ='data:image/png;base64,'+Buffer(data).toString('base64');
-            res.end(img);
+
+            res.json(img);
         });
         readstream.on('error',function(err)
         {
@@ -88,7 +89,7 @@ const conn = mongoose.connection;
 
  
  
-    router.delete('/delete2/:id',(req,res)=>{
+    router.delete('/delete/:id',(req,res)=>{
     const imagename=req.params.id
     gfs.files.find({filename:imagename}).toArray(function(err,files){
         if(err){
