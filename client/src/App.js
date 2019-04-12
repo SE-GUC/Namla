@@ -1,32 +1,19 @@
 import React, { Component } from 'react';
+import ProductPost from './components/ProductPost'
 import './App.css';
-import Form from './components/Form.js';
-import Postrec from './components/Postrec';
-import { BrowserRouter as Router, Route } from 'react-router-dom'
-import Child from './components/child'
-import Confmsg from './components/Confmsg'
+import ProductGet from './components/ProductGet';
+import ProductPut from './components/ProductPut';
+import ProductDelete from './components/ProductDelete';
+
 class App extends Component {
   render() {
     return (
       <div className="App">
-      <div>Recruitment Form</div>
-        <Form onChange={fields => this.onChange(fields)}/>
-        <p>
-          {JSON.stringify(this.state.fields,null,2)}
-        </p>
-        <p>to post </p>
-        <div className="Post">
-      <Postrec/>
+      <ProductGet/>
+      <ProductPost/>
+      <ProductPut/>
+      <ProductDelete/>
       </div>
-      <div className="App">
-      <Confmsg/>
-      </div>
-
-        <Router>
-          <Route path="/child" component={Child}/>
-        </Router>
-      </div>
-      
     );
   }
 }

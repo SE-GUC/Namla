@@ -13,7 +13,7 @@ const functions = {
   createProduct: async () => {
     const product = await axios.post("http://localhost:3000/api/products", {
       "name": "chips",
-      "type": "food",
+      "category": "food",
       "price": 3
     });
     return product;
