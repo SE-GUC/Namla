@@ -11,11 +11,6 @@ import Faqsection2 from './components/Faqsection2';
 import AddFAQ from './components/AddFAQ';
 import uuid from 'uuid';
 
-delFaqsection2 = (id) =>{
-this.setState({Faqsection2: [...this.state.Faqsection2.filter(Faqsection2 => Faqsection2.id !== id)]  });
-}
-
-
 
 class App extends Component {
   state = {
@@ -42,9 +37,6 @@ class App extends Component {
     }
     this.setState({Faqsection2 : [...this.state.Faqsection2,newFaqsection2]});
   }
-  
- 
- 
   render() {
     return (
       <div className="App">
@@ -71,7 +63,7 @@ class App extends Component {
       <div className="container">
       <Header />
       <AddFAQ AddFAQ={this.AddFAQ} />
-      <Faqsection2 Faqsection2={this.state.Faqsection2} delFaqsection2={this.delFaqsection2} />
+      <Faqsection2 Faqsection2={this.state.Faqsection2} />
       </div>
       </div>
       </div>

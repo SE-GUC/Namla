@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 class Faqsection2 extends Component {
   render() {
     return this.props.Faqsection2.map((Faqsection2) => (
-      <Faqsectionitem key={Faqsection2.id} Faqsection2 ={Faqsection2} delFaqsection={this.props.delFaqsection} />
+      <Faqsectionitem key={Faqsection2.id} Faqsection2 ={Faqsection2}/>
 
 
     ));
@@ -16,4 +16,3 @@ Faqsection2.propTypes ={
 }
 
 export default Faqsection2;
-
