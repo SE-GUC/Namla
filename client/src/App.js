@@ -10,33 +10,36 @@ import Header from './components/Layout/Header';
 import Faqsection2 from './components/Faqsection2';
 import AddFAQ from './components/AddFAQ';
 import uuid from 'uuid';
-state = {
-  Faqsection2 : [
-    {
-      id:uuid.v4(),
-      title: 'Read the questions carefully.'
-    },
-    {
-      id:uuid.v4(),
-      title: 'Number of commities?  Answer:6'
-    },
-    {
-      id:uuid.v4(),
-      title: 'Working Hours?     Answer:8'
-    }
-  ]
-}
-
-AddFAQ = (title) => {
-  const newFaqsection2 = {
-    id :uuid.v4(),
-    title: title
-  }
-  this.setState({Faqsection2 : [...this.state.Faqsection2,newFaqsection2]});
-}
 
 
 class App extends Component {
+  state = {
+    Faqsection2 : [
+      {
+        id:uuid.v4(),
+        title: 'Read the questions carefully.'
+      },
+      {
+        id:uuid.v4(),
+        title: 'Number of commities?  Answer:6'
+      },
+      {
+        id:uuid.v4(),
+        title: 'Working Hours?     Answer:8'
+      }
+    ]
+  }
+  
+  AddFAQ = (title) => {
+    const newFaqsection2 = {
+      id :uuid.v4(),
+      title: title
+    }
+    this.setState({Faqsection2 : [...this.state.Faqsection2,newFaqsection2]});
+  }
+  
+ 
+ 
   render() {
     return (
       <div className="App">

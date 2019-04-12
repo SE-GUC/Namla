@@ -1,6 +1,6 @@
 const functions = require('./fn')
-const cart = require('./models/Cart')
-const product = require('./models/Product')
+const cart = require('../models/Cart')
+const product = require('../models/Product')
 test("update cart", async () =>{
     expect.assertions(1)
     const cart = await functions.createCart()
