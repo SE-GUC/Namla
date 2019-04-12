@@ -4,7 +4,7 @@ module.exports = {
     createValidation: request => {
         const createSchema = {
             name: Joi.string(),
-            type: Joi.string(),
+            category: Joi.string(),
             price: Joi.number()
         }
 
@@ -14,7 +14,7 @@ module.exports = {
     updateValidation: request => {
         const updateSchema = {
             name: Joi.string(),
-            type: Joi.string(),
+            category: Joi.string(),
             price: Joi.number()
         }
 

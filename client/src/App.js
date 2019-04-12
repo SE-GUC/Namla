@@ -5,6 +5,10 @@ import Form from './components/Form.js';
 import Postrec from './components/Postrec';
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 import Child from './components/child'
+import ProductDelete from './components/ProductDelete'
+import ProductGet from './components/ProductGet'
+import ProductPost from './components/ProductPost'
+import ProductPut from './components/ProductPut'
 import Confmsg from './components/Confmsg'
 import Header from './components/Layout/Header';
 import Faqsection2 from './components/Faqsection2';
@@ -71,6 +75,10 @@ class App extends Component {
       <Faqsection2 Faqsection2={this.state.Faqsection2} delFaqsection2={this.delFaqsection2} />
       </div>
       </div>
+      <ProductGet/>
+      <ProductPost/>
+      <ProductPut/>
+      <ProductDelete/>
       </div>
       
       
