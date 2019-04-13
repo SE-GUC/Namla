@@ -3,8 +3,9 @@ import PropTypes from 'prop-types';
 import axios from 'axios'
 
 
-export class Postrec extends Component {
+export class Updaterec extends Component {
  state ={
+   id: "",  
    ClientName:'',
    age:Number,
    address:'',
@@ -28,6 +29,9 @@ export class Postrec extends Component {
    InterviewTimeonChange (event){
      this.setState({InterviewTime: event.target.value});
    }
+   idonChange (event){
+    this.setState({id: event.target.value});
+    }
   
 
   onSubmit =event=>{
@@ -38,7 +42,7 @@ export class Postrec extends Component {
    const InterviewDate=this.state.InterviewDate
    const InterviewTime=this.state.InterviewTime
     axios
-    .post('http://localhost:5000/api/RecruitmentForms/',({
+    .put(`http://localhost:5000/api/RecruitmentForms/update/${this.state.id}`,({
     ClientName: ClientName,
     age:age,
     address:address,
@@ -58,7 +62,8 @@ render() {
     return (
   <form >
   <div>
-    <h1>Post Recruitment Form</h1>
+    <h1>Update Recruitment Form</h1>
+    <input type="text"  placeholder="Form ID" value={this.state.value} style={{ flex: '10', padding: '5px' }} onChange={this.idonChange.bind(this)}/><br/>
     <input type="text"  placeholder="Post rec" value={this.state.value} style={{ flex: '10', padding: '5px' }} onChange={this.clientnameonChange.bind(this)}/><br/>
     <input type="text"  placeholder="age"   value={this.state.value} style={{ flex: '10', padding: '5px' }} onChange={this.ageonChange.bind(this)}/><br/>      
     <input type="text"  placeholder="address" value={this.state.value} style={{ flex: '10', padding: '5px' }} onChange={this.addressonchange.bind(this)}/><br/>      
@@ -76,7 +81,7 @@ render() {
 }
 
 
-Postrec.propTypes = {
-  Postrec: PropTypes.func.isRequired
+Updaterec.propTypes = {
+    Updaterec: PropTypes.func.isRequired
 }
-export default Postrec;
+export default Updaterec;
