@@ -3,7 +3,14 @@ import Faqsection from './components/Faqsection'
 import './App.css';
 import Form from './components/Form.js';
 import Postrec from './components/Postrec';
+
 import { BrowserRouter as Router, Route ,Link} from 'react-router-dom'
+
+import Deleterec from './components/Deleterec';
+import Getrec from './components/Getrec';
+import Updaterec from './components/Updaterec';
+
+
 import Child from './components/child'
 import ProductDelete from './components/ProductDelete'
 import ProductGet from './components/ProductGet'
@@ -71,25 +78,27 @@ class App extends Component {
 
       <div className="App">
       <Faqsection />
-      <div>Recruitment Form</div>
+
         <Form onChange={fields => this.onChange(fields)}/>
         <p>
           {JSON.stringify(this.state.fields,null,2)}
-        </p>
-        <p>to post </p>
-        <div className="Post">
-      <Postrec/>
+        </p>          
 
-      <Route exact path="/Gallery" component={Gallery}/>
+        <Postrec/>
+        <Updaterec/>
+        <Deleterec/>
+        <Getrec/>
+      
+  <Route exact path="/Gallery" component={Gallery}/>
 
-      </div>
+   
      <ul>
       <li>
 
            <Link to="/Gallery">GALLERY</Link>
           </li>
           </ul>
-          
+
       <div className="App">
       <Confmsg/>
       </div>

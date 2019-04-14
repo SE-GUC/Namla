@@ -53,52 +53,15 @@ export default class Form extends React.Component {
     render() { 
         return(
             <form>
-                <input name ="ClientName"
-                 placeholder ='ClientName'
-                 value={this.state.ClientName}
-                 onChange={e => this.change(e)}/>
 
                  <br/>
-                 <input name ="address"
-                  placeholder ='address'
-                  value={this.state.address}
-                  onChange={e => this.change(e)}/>
-                 <br/>
-                 <input name ="age"
-                  placeholder ='age'
-                  value={this.state.age}
-                  onChange={e => this.change(e)}/>
-                  <br/>
-
-                 <input name="InterviewDate"
-                  placeholder ='InterviewDate'
-                  value={this.state.InterviewDate}
-                  onChange={e => this.change(e)}/>
-                  <br/>
-
-                 <input name="InterviewTime"
-                  placeholder ='InterviewTime'
-                  value={this.state.InterviewTime}
-                  onChange={e => this.change(e)}/>
-                  <br/>
-                  <button onClick={e => this.onSubmit(e)}>Submit</button>
-
-                  {/* <br/>
-                  <p>All Recruitment Forms :</p>
-                  <ul>
-                    {this.state.forms.map(formm => ( //console.log(formm.data[0]._id)
-                         <li key={formm.data[0]._id}>{formm.data[0].ClientName}</li>
-                    ))}
-                 </ul> */}
-
-                 <br/>
-                  <p>All Recruitment Forms :</p>
-                  <ul>
+                  <h1>All Recruitment Forms :</h1>
+                  <ul> 
                     {this.state.form.map(formm => ( 
-                         <li key={formm._id}>{formm.ClientName} {formm.address} {formm.age} {formm.InterviewDate} {formm.InterviewTime}</li>
+                         <li key={formm._id}>ClientName: {formm.ClientName} Address: {formm.address} Age: {formm.age} InterviewDate: {formm.InterviewDate} InterviewTime: {formm.InterviewTime}</li>
                     ))}
                  </ul>
-
+                   
             </form>
 
         );
