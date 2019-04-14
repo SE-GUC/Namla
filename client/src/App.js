@@ -3,13 +3,15 @@ import Faqsection from './components/Faqsection'
 import './App.css';
 import Form from './components/Form.js';
 import Postrec from './components/Postrec';
-import { BrowserRouter as Router, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Route ,Link} from 'react-router-dom'
 import Child from './components/child'
 import Confmsg from './components/Confmsg'
 import Header from './components/Layout/Header';
 import Faqsection2 from './components/Faqsection2';
 import AddFAQ from './components/AddFAQ';
 import uuid from 'uuid';
+import Gallery from './components/Gallery';
+
 
 
 class App extends Component {
@@ -39,11 +41,10 @@ class App extends Component {
   }
   render() {
     return (
+      <Router>
+
       <div className="App">
-
-
       <Faqsection />
-
       <div>Recruitment Form</div>
         <Form onChange={fields => this.onChange(fields)}/>
         <p>
@@ -52,22 +53,34 @@ class App extends Component {
         <p>to post </p>
         <div className="Post">
       <Postrec/>
+
+      <Route exact path="/Gallery" component={Gallery}/>
+
       </div>
+     <ul>
+      <li>
+
+           <Link to="/Gallery">GALLERY</Link>
+          </li>
+          </ul>
+          
       <div className="App">
       <Confmsg/>
       </div>
-        <Router>
           <Route path="/child" component={Child}/>
-        </Router>
         <div className="App">
       <div className="container">
       <Header />
       <AddFAQ AddFAQ={this.AddFAQ} />
       <Faqsection2 Faqsection2={this.state.Faqsection2} />
-      </div>
-      </div>
-      </div>
       
+      </div>
+      </div>
+      </div>
+     <hr/>
+  
+   </Router>
+
       
       
     );

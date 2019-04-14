@@ -110,7 +110,7 @@ class Child extends Component {
                     Family Status<input type="text" value={this.state.familyStatus} name="familyStatus" onChange={this.onValueChange}/><br/>
                     Educational Level<input type="text" value={this.state.educationalLevel} name="educationalLevel" onChange={this.onValueChange}/><br/>
                     <button onClick={ () => {
-                        if (this.state.button=="Add Child") {
+                        if (this.state.button==="Add Child") {
                             this.createChild() 
                         } else { 
                                 this.updateChild()

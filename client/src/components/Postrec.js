@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import axios from 'axios'
 
 
@@ -76,7 +76,7 @@ render() {
 }
 
 
-Postrec.propTypes = {
-  Postrec: PropTypes.func.isRequired
-}
+// Postrec.propTypes = {
+//   Postrec: PropTypes.func.isRequired
+// }
 export default Postrec;
