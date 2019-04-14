@@ -23,7 +23,11 @@ import AddFAQ from './components/AddFAQ';
 import uuid from 'uuid';
 import Gallery from './components/Gallery';
 
-
+import RequestList from './RequestList';
+import RequestForm from './RequestForm';
+import RequestDeletionForm from './RequestDeletionForm';
+import ProfileList from './ProfileList';
+import ProfileForm from './ProfileForm';
 
 class App extends Component {
   state = {
@@ -119,8 +123,23 @@ class App extends Component {
       <ProductDelete/>
       </div>
      <hr/>
-  
+  <Route path="/SkillsInMansheya">
+    <Header />
+
+      <RequestList>Get all Requests for skills</RequestList>
+
+      <RequestForm>Request a Certain Skill</RequestForm>
+
+      <RequestDeletionForm> Delete a certain Request to a skill </RequestDeletionForm>
+
+      <ProfileList>Get all Workshop Owner profiles</ProfileList>
+
+      <ProfileForm>Create a new WorkshopOwner Profile</ProfileForm>
+
+  </Route>
    </Router>
+   
+
 
       
       
