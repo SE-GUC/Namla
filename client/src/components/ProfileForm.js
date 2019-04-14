@@ -5,12 +5,12 @@ class ProfileForm extends Component {
     state={
         value:""
     }
-    handleSubmit(e){
+    handleSubmit= e => {
         e.preventDefault();
         axios.post('./routes/api/workshopOwners', this.state);
     }
 
-    handleChange(e){
+    handleChange= e => {
         e.preventDefault();
         this.setState({value:e.target.value});
     }

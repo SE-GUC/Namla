@@ -5,12 +5,12 @@ class RequestDeletionForm extends Component {
     state={
         value:""
     }
-    handleSubmit(e){
+    handleSubmit = e => {
         e.preventDefault();
         axios.delete(`./routes/api/skillRequests/${this.state.value}`);
     }
 
-    handleChange(e){
+    handleChange = e => {
         e.preventDefault();
         this.setState({value:e.target.value});
     }

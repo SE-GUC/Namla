@@ -5,14 +5,14 @@ class RequestForm extends Component {
     state={
         Skill:""
     }
-    handleSubmit(e){
+    handleSubmit = e => {
         e.preventDefault();
         axios.post('./routes/api/skillRequests', this.state);
     }
 
-    handleChange(e){
+    handleChange = e => {
         e.preventDefault();
-        this.setState({Skill:e.target.value});
+        this.setState({Skill : e.target.value});
     }
 
     render(){

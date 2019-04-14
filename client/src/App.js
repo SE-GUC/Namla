@@ -23,11 +23,11 @@ import AddFAQ from './components/AddFAQ';
 import uuid from 'uuid';
 import Gallery from './components/Gallery';
 
-import RequestList from './RequestList';
-import RequestForm from './RequestForm';
-import RequestDeletionForm from './RequestDeletionForm';
-import ProfileList from './ProfileList';
-import ProfileForm from './ProfileForm';
+import RequestList from './components/RequestList';
+import RequestForm from './components/RequestForm';
+import RequestDeletionForm from './components/RequestDeletionForm';
+import ProfileList from './components/ProfileList';
+import ProfileForm from './components/ProfileForm';
 
 class App extends Component {
   state = {
