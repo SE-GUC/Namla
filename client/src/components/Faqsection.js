@@ -26,7 +26,11 @@ class Faqsection extends Component {
     return (
       <div>
       <h1>Faqsection</h1>
-      <u1>{this.state.faqsection.map(faq => <li>{faq.question} {faq.answer}</li> )}</u1>
+      <u1>
+      {this.state.faqsection.map(faq => (
+      <li key={faq._id}>{faq.question} {faq.answer}</li> 
+
+      ))} </u1>
       
       
         
