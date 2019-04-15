@@ -22,13 +22,18 @@ import Faqsection2 from './components/Faqsection2';
 import AddFAQ from './components/AddFAQ';
 import uuid from 'uuid';
 import Gallery from './components/Gallery';
+import EditFaq from './comonents/EditFaq'
+
 
 import RequestList from './components/RequestList';
 import RequestForm from './components/RequestForm';
 import RequestDeletionForm from './components/RequestDeletionForm';
 import ProfileList from './components/ProfileList';
 import ProfileForm from './components/ProfileForm';
-
+import SuggestionBox from './components/SuggestionBoxget'
+import CreateSuggestionBox from './components/SuggestionBoxpost'
+import UpdateSuggestionBox from './components/SuggestionBoxput'
+import DeleteSuggestionBox from './components/SuggestionBoxDelete'
 class App extends Component {
   state = {
     Faqsection2 : [
@@ -82,6 +87,7 @@ class App extends Component {
 
       <div className="App">
       <Faqsection />
+      <EditFaq />
 
         <Form onChange={fields => this.onChange(fields)}/>
         <p>
@@ -137,6 +143,11 @@ class App extends Component {
       <ProfileForm>Create a new WorkshopOwner Profile</ProfileForm>
 
   </Route>
+
+  <Route exact path="/suggestionBox" component={SuggestionBox}/>
+  <Route exact path="/createSuggestionBox" component={CreateSuggestionBox}/>
+  <Route exact path="/deleteSuggestionBox" component={DeleteSuggestionBox} />
+  <Route exact path="/updateSuggestionBox" component={UpdateSuggestionBox} />  
    </Router>
    
 
