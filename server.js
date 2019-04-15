@@ -2,44 +2,30 @@ const mongoose = require('mongoose')
 const cors = require('cors')
 const express = require('express')
 const app = express(); 
-// Require Router Handlers
 
-const Cart = require('./routes/api/Cart')
-
-
-
-//const multer = require('multer');
-//const ejs = require('ejs');
-//const path = require('path');
 var fs=require('fs')
 var directory ="./public/uploads";
 
 var dirbuff=Buffer.from(directory);
 var images=fs.readdirSync(directory);
-const app = express();
 app.use(cors())
+
+
 
 const users = require('./routes/api/users')
 const admins = require('./routes/api/admins')
-
 const TeamsController = require('./routes/api/TeamsController')
-
 const products = require('./routes/api/products')
 const Announcements = require('./routes/api/Announcement')
-
-
 const workshopOwners = require('./routes/api/workshopOwners')
 const skillRequests = require('./routes/api/skillRequests')
-
 const RecruitmentForms = require('./routes/api/RecruitmentForms')
-
 const Faqsection = require('./routes/api/Faqsection')
 const Faqsection2 = require('./routes/api/Faqsection2')
 const NebnyAdmins = require('./routes/api/NebnyAdmins')
 const NebnyUsers = require('./routes/api/NebnyUsers')
 const suggestionBox= require('./routes/api/suggestionbox')
-
-
+const Cart = require('./routes/api/Cart')
 const confirmationmessages = require('./routes/api/confirmationmessages')
 
 
@@ -51,17 +37,11 @@ mongoose
     .catch(err => console.log(err))
 
 app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, 'views'));
+//app.set('views', path.join(__dirname, 'views'));
 
 
 
 app.use(express.json())
-
- 
-
-
-// Init middleware
-
 app.use(express.urlencoded({extended: false}))
 
 

@@ -1,26 +1,22 @@
 import React, { Component } from 'react';
-import suggestionbox from './components/suggestionbox '
+import SuggestionBoxDelete from './components/SuggestionBoxDelete';
+import SuggestionBoxput from './components/SuggestionBoxput';
+import SuggestionBoxpost from './components/SuggestionBoxpost';
+import SuggestionBoxget from './components/SuggestionBoxget';
 import './App.css';
+import {BrowserRouter as Router,Route} from 'react-router-dom'
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
+        <div>
+      <Router>
+        <Route exact path='/SuggestionBox' component={ SuggestionBoxget}/>
+        <Route exact path= '/createSuggestionBox' component ={SuggestionBoxpost }/>
+        <Route exact path ='/updateSuggestionBox' component ={SuggestionBoxput }/>
+        <Route exact path = '/deleteSuggestionBox' component = {SuggestionBoxDelete}/>
+      </Router>
+        </div>
     );
   }
 }
