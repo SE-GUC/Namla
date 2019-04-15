@@ -22,7 +22,7 @@ import Faqsection2 from './components/Faqsection2';
 import AddFAQ from './components/AddFAQ';
 import uuid from 'uuid';
 import Gallery from './components/Gallery';
-import EditFaq from './comonents/EditFaq'
+import EditFaq from './components/EditFaq'
 
 
 import RequestList from './components/RequestList';
