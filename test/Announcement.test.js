@@ -3,7 +3,6 @@ const announcement = require("./Anno.fns");
 test("Create Announcement",async () => {
     
     const Ann={
-        title:"test1",
         details:"asdduhdusad"
     } 
     const created =await announcement.createAnnouncement(Ann);
@@ -22,14 +21,12 @@ test("Create Announcement",async () => {
 
   test("update Announcement",async () => {
     const Ann={
-        title:"test",
         details:"asdsad"
     } 
     const created =await announcement.createAnnouncement(Ann);
     const createdData=created.data.data
     const id=createdData["_id"]
     const update={
-        title:"testUpdate",
         details:"sdasd"
     }
     const updated =await announcement.updateAnnouncement(id,update);
@@ -42,7 +39,7 @@ test("Create Announcement",async () => {
 
  test("Delete Announcement",async () => {
     const Ann={
-        title:"test",
+        
         details:"asdsad"
     } 
     const created =await announcement.createAnnouncement(Ann);
