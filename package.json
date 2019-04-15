@@ -1,9 +1,5 @@
 {
-<<<<<<< HEAD
   "name": "namla",
-=======
-  "name": "express-test",
->>>>>>> react_dev
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
@@ -15,8 +11,6 @@
     "client": "npm start --prefix client",
     "dev": "concurrently \"npm run server\" \"npm run client\""
   },
-<<<<<<< HEAD
-=======
   "keywords": [],
   "dependencies": {
     "axios": "^0.18.0",
@@ -39,7 +33,6 @@
     "jest": "^24.1.0",
     "nodemon": "^1.18.10"
   },
->>>>>>> react_dev
   "repository": {
     "type": "git",
     "url": "git+https://github.com/SE-GUC/Namla.git"
@@ -49,7 +42,6 @@
   "bugs": {
     "url": "https://github.com/SE-GUC/Namla/issues"
   },
-<<<<<<< HEAD
   "homepage": "https://github.com/SE-GUC/Namla#readme",
   "dependencies": {
     "axios": "^0.18.0",
@@ -61,7 +53,4 @@
     "node-fetch": "^2.3.0",
     "uuid": "^3.3.2"
   }
-=======
-  "homepage": "https://github.com/SE-GUC/Namla#readme"
->>>>>>> react_dev
 }

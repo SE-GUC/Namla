@@ -18,17 +18,10 @@ const conn = mongoose.connection;
     conn.once("open", () => {
         gfs = Grid(conn.db);
 
-<<<<<<< HEAD
 
 
 
 
-=======
-
-
-
-
->>>>>>> react_dev
     router.get('/home', (req, res) => {
             gfs.files.find().toArray(function(err,files){
                 if(files.length === 0){
@@ -103,13 +96,8 @@ const conn = mongoose.connection;
         readstream.on('end',function(){
             data=Buffer.concat(data);
             let img ='data:image/png;base64,'+Buffer(data).toString('base64');
-<<<<<<< HEAD
 
             res.json(img);
-=======
-            
-            res.end(img);
->>>>>>> react_dev
         });
         readstream.on('error',function(err)
         {
