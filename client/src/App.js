@@ -28,7 +28,10 @@ import RequestForm from './components/RequestForm';
 import RequestDeletionForm from './components/RequestDeletionForm';
 import ProfileList from './components/ProfileList';
 import ProfileForm from './components/ProfileForm';
-
+import SuggestionBox from './components/SuggestionBoxget'
+import CreateSuggestionBox from './components/SuggestionBoxpost'
+import UpdateSuggestionBox from './components/SuggestionBoxput'
+import DeleteSuggestionBox from './components/SuggestionBoxDelete'
 class App extends Component {
   state = {
     Faqsection2 : [
@@ -137,6 +140,11 @@ class App extends Component {
       <ProfileForm>Create a new WorkshopOwner Profile</ProfileForm>
 
   </Route>
+
+  <Route exact path="/suggestionBox" component={SuggestionBox}/>
+  <Route exact path="/createSuggestionBox" component={CreateSuggestionBox}/>
+  <Route exact path="/deleteSuggestionBox" component={DeleteSuggestionBox} />
+  <Route exact path="/updateSuggestionBox" component={UpdateSuggestionBox} />  
    </Router>
    
 
