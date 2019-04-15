@@ -22,6 +22,8 @@ import Faqsection2 from './components/Faqsection2';
 import AddFAQ from './components/AddFAQ';
 import uuid from 'uuid';
 import Gallery from './components/Gallery';
+import EditFaq from './comonents/EditFaq'
+
 
 
 
@@ -78,6 +80,7 @@ class App extends Component {
 
       <div className="App">
       <Faqsection />
+      <EditFaq />
 
         <Form onChange={fields => this.onChange(fields)}/>
         <p>
