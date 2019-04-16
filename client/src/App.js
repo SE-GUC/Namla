@@ -34,6 +34,12 @@ import SuggestionBox from './components/SuggestionBoxget'
 import CreateSuggestionBox from './components/SuggestionBoxpost'
 import UpdateSuggestionBox from './components/SuggestionBoxput'
 import DeleteSuggestionBox from './components/SuggestionBoxDelete'
+
+import HeaderAnnoun from './components/layout/HeaderAnnoun';
+import Announcements from './components/Announcements';
+import About from './components/pages/About';
+
+
 class App extends Component {
   state = {
     Faqsection2 : [
@@ -148,10 +154,20 @@ class App extends Component {
   <Route exact path="/createSuggestionBox" component={CreateSuggestionBox}/>
   <Route exact path="/deleteSuggestionBox" component={DeleteSuggestionBox} />
   <Route exact path="/updateSuggestionBox" component={UpdateSuggestionBox} />  
-   </Router>
    
 
-
+        <div className="App">
+          <div className="container">
+            <HeaderAnnoun />
+            <Route exact path="/" render={props => (
+              <React.Fragment>
+                <Announcements />
+              </React.Fragment>
+            )} />
+            <Route path="/about" component={About} />
+          </div>  
+        </div>
+      </Router>
       
       
     );
