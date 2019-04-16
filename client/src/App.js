@@ -22,7 +22,7 @@ import Faqsection2 from './components/Faqsection2';
 import AddFAQ from './components/AddFAQ';
 import uuid from 'uuid';
 import Gallery from './components/Gallery';
-import EditFaq from './comonents/EditFaq'
+import EditFaq from './components/EditFaq'
 
 
 import RequestList from './components/RequestList';
@@ -35,7 +35,7 @@ import CreateSuggestionBox from './components/SuggestionBoxpost'
 import UpdateSuggestionBox from './components/SuggestionBoxput'
 import DeleteSuggestionBox from './components/SuggestionBoxDelete'
 
-import HeaderAnnoun from './components/layout/HeaderAnnoun';
+import HeaderAnnoun from './components/Layout/HeaderAnnoun';
 import Announcements from './components/Announcements';
 import About from './components/pages/About';
 
@@ -158,7 +158,7 @@ class App extends Component {
 
         <div className="App">
           <div className="container">
-            <HeaderAnnoun />
+            <HeaderAnnoun/>
             <Route exact path="/" render={props => (
               <React.Fragment>
                 <Announcements />
