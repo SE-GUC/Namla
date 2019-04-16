@@ -1,5 +1,5 @@
 {
-  "name": "express-test",
+  "name": "namla",
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
@@ -28,7 +28,8 @@
     "passport": "^0.4.0",
     "passport-jwt": "^4.0.0",
     "react-dom": "^16.8.6",
-    "react-notifications-component": "^1.1.1"
+    "react-notifications-component": "^1.1.1",
+    "uuid": "^3.3.2"
   },
   "devDependencies": {
     "jest": "^24.1.0",

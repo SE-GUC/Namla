@@ -96,8 +96,8 @@ const conn = mongoose.connection;
         readstream.on('end',function(){
             data=Buffer.concat(data);
             let img ='data:image/png;base64,'+Buffer(data).toString('base64');
-            
-            res.end(img);
+
+            res.json(img);
         });
         readstream.on('error',function(err)
         {
