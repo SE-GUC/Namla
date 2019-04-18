@@ -1,6 +1,9 @@
 const express = require('express')
 const bcrypt = require('bcryptjs')
 const router = express.Router()
+const jwt = require('jsonwebtoken')
+const tokenKey = require('../../config/keys').secretOrKey
+
 
 const NebnyAdmin = require('../../models/NebnyAdmin')
 const validator = require('../../validations/NebnyAdminValidations')
@@ -32,6 +35,25 @@ router.post('/register', async (req,res) => {
     .catch(err => res.json({error: 'Can not create Nebnyadmin'}))
 })
 
+
+router.post('/login', async (req, res) => {
+	try {
+		const { email, password } = req.body;
+		const admin = await NebnyAdmin.findOne({ email });
+		if (!admin) return res.status(404).json({ email: 'Email does not exist' });
+		const match = bcrypt.compareSync(password, admin.password);
+		if (match) {
+            const payload = {
+                id: admin.id,
+                name: admin.name,
+                email: admin.email
+            }
+            const token = jwt.sign(payload, tokenKey, { expiresIn: '1h' })
+            return res.json({token: `Bearer ${token}`})
+        }
+		else return res.status(400).send({ password: 'Wrong password' });
+	} catch (e) {}
+});
 router.put('/update/:id', async (req,res) => {
     try {
      const id = req.params.id
