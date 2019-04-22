@@ -24,7 +24,7 @@ handleSubmit = event=>{
         
     }
 
-    axios.post('http://localhost:5000/api/products', suggestionbox)
+    axios.put('http://localhost:5000/api/suggestionBox', suggestionbox)
     .then(res=>{
     console.log(res);
     console.log(res.data);

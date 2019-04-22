@@ -5,6 +5,7 @@ import SuggestionBoxpost from './components/SuggestionBoxpost';
 import SuggestionBoxget from './components/SuggestionBoxget';
 import './App.css';
 import {BrowserRouter as Router,Route} from 'react-router-dom'
+import UpdatingCart from './components/UpdatingCart';
 
 class App extends Component {
   render() {
@@ -15,6 +16,9 @@ class App extends Component {
         <Route exact path= '/createSuggestionBox' component ={SuggestionBoxpost }/>
         <Route exact path ='/updateSuggestionBox' component ={SuggestionBoxput }/>
         <Route exact path = '/deleteSuggestionBox' component = {SuggestionBoxDelete}/>
+        <Route exact path = '/updatecart' component = {UpdatingCart}/>
+        <Route exact path = '/getcart' component = {GetCart}/>
+        
       </Router>
         </div>
     );
