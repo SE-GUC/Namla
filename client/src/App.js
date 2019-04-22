@@ -95,15 +95,16 @@ class App extends Component {
       <Faqsection />
       <EditFaq />
 
-        <Form onChange={fields => this.onChange(fields)}/>
-        <p>
-          {JSON.stringify(this.state.fields,null,2)}
-        </p>          
-
-        <Postrec/>
-        <Updaterec/>
-        <Deleterec/>
-        <Getrec/>
+          <Route exact path="/recform" component={Form}/>
+          <Route exact path="/recform" component={Postrec}/>
+          <Route exact path="/recform" component={Updaterec}/>
+          <Route exact path="/recform" component={Deleterec}/>
+          <Route exact path="/recform" component={Getrec}/>
+            <ul>
+               <li>
+                 <Link to="/recform">Recruitment Page</Link>
+               </li>
+            </ul>
       
   <Route exact path="/Gallery" component={Gallery}/>
 
