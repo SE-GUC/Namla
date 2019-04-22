@@ -35,7 +35,7 @@ export class Updaterec extends Component {
   
 
   onSubmit =event=>{
-    event.preventDefault();
+    //event.preventDefault();
    const ClientName=this.state.ClientName
    const age=this.state.age
    const address=this.state.address
@@ -63,7 +63,7 @@ render() {
   <form >
   <div>
     <h1>Update Recruitment Form</h1>
-    <input type="text"  placeholder="Form ID" value={this.state.value} style={{ flex: '10', padding: '5px' }} onChange={this.idonChange.bind(this)}/><br/>
+    <input type="text"  placeholder="UserID/FormID" value={this.state.value} style={{ flex: '10', padding: '5px' }} onChange={this.idonChange.bind(this)}/><br/>
     <input type="text"  placeholder="Post rec" value={this.state.value} style={{ flex: '10', padding: '5px' }} onChange={this.clientnameonChange.bind(this)}/><br/>
     <input type="text"  placeholder="age"   value={this.state.value} style={{ flex: '10', padding: '5px' }} onChange={this.ageonChange.bind(this)}/><br/>      
     <input type="text"  placeholder="address" value={this.state.value} style={{ flex: '10', padding: '5px' }} onChange={this.addressonchange.bind(this)}/><br/>      

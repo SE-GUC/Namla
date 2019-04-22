@@ -31,7 +31,7 @@ render() {
   <form >
   <div>
     <h1>Delete Recruitment Form</h1>
-    <input type="text"  placeholder="Form ID" value={this.state.value} style={{ flex: '10', padding: '5px' }} onChange={this.idonChange.bind(this)}/><br/>
+    <input type="text"  placeholder="AdminID/FormID" value={this.state.value} style={{ flex: '10', padding: '5px' }} onChange={this.idonChange.bind(this)}/><br/>
  
     <input 
           type="submit" 
