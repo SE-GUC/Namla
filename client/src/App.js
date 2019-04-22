@@ -23,7 +23,7 @@ import AddFAQ from './components/AddFAQ';
 import uuid from 'uuid';
 import Gallery from './components/Gallery';
 import EditFaq from './components/EditFaq'
-
+import Platform from './components/Layout/Platform'
 
 import RequestList from './components/RequestList';
 import RequestForm from './components/RequestForm';
@@ -92,6 +92,7 @@ class App extends Component {
       <Router>
 
       <div className="App">
+      <Platform/>
       <Faqsection />
       <EditFaq />
 
