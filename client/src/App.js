@@ -86,6 +86,7 @@ class App extends Component {
      this.setState({ Faqsection2:[...this.state.Faqsection2.filter(Faqsection2 => Faqsection2.id 
       !== id )] });
    }
+   //----------------------------------------------------------------------------------------------------------------
     
   render() {
     return (
@@ -111,7 +112,10 @@ class App extends Component {
      <ul>
       <li>
 
+      
            <Link to="/Gallery">GALLERY</Link>
+           <Link to="/products">PRODUCTS</Link>
+
           </li>
           </ul>
 
@@ -128,11 +132,17 @@ class App extends Component {
        delFaqsection2 = {this.delFaqsection2}
       />
       </div>
+
+        
       </div>
+      <Route exact path="/products" component={{ProductGet,ProductPut,ProductPut,ProductDelete}}>
+
       <ProductGet/>
       <ProductPost/>
       <ProductPut/>
       <ProductDelete/>
+
+      </Route>
       </div>
      <hr/>
   <Route path="/SkillsInMansheya">
@@ -154,7 +164,6 @@ class App extends Component {
   <Route exact path="/createSuggestionBox" component={CreateSuggestionBox}/>
   <Route exact path="/deleteSuggestionBox" component={DeleteSuggestionBox} />
   <Route exact path="/updateSuggestionBox" component={UpdateSuggestionBox} />  
-   
 
         <div className="App">
           <div className="container">
