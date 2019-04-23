@@ -20,7 +20,6 @@ class Team extends Component {
         this.createChild = this.createChild.bind(this)
         this.onValueChange = this.onValueChange.bind(this)
         this.onSelected = this.onSelected.bind(this)
-        this.onRemoved = this.onRemoved.bind(this)
     }
 
     getChildren() {
@@ -113,15 +112,6 @@ class Team extends Component {
                 this.setState({  selected:newSelected, children:newChildren })
             }
         }
-    }
-
-    onRemoved(child) {
-        axios.put(this.state.url+"remove/"+child._id, {})      
-        var newSelected = this.state.selected
-        var newChildren = this.state.children
-        newSelected.splice(newSelected.indexOf(child),1)
-        newChildren.push(child)
-        this.setState({ selected:newSelected, children:newChildren })
     }
 
     mapper(child) {
