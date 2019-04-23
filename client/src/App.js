@@ -9,6 +9,8 @@ import { BrowserRouter as Router, Route ,Link} from 'react-router-dom'
 import Deleterec from './components/Deleterec';
 import Getrec from './components/Getrec';
 import Updaterec from './components/Updaterec';
+
+import Team from './components/team'
 import CartCreate from './components/CartCreate'
 import DeleteCart from './components/DeleteCart';
 import Admingallery from './components/Admingallery';
@@ -99,6 +101,10 @@ class App extends Component {
            <Route exact path="/Logout" component={Logout}/>
            
       <div className="App">
+      </div>
+          <Route path="/team" component={Team}/>
+        <div className="App">
+
       <Platform/>
       <Faqsection />
       <EditFaq />
@@ -123,9 +129,6 @@ class App extends Component {
 
       <div className="App">
       <Confmsg/>
-      </div>
-          <Route path="/child" component={Child}/>
-        <div className="App">
       <div className="container">
       <Header />
       <AddFAQ AddFAQ={this.AddFAQ} />
@@ -174,8 +177,8 @@ class App extends Component {
               </React.Fragment>
             )} />
             <Route path="/about" component={About} />
-          </div>  
-        </div>
+          </div> 
+        </div> 
       </Router>
       
       
