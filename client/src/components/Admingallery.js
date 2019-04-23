@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios'
 import HeaderGallery from './Layout/HeaderGallery';
+import { error } from 'util';
 
 
 
@@ -87,6 +88,8 @@ export class Admingallery extends Component {
     axios.delete(`http://localhost:5000/api/gallery/delete/${filename}`,{Header:headers})
       .then(res =>    console.log(res)
       );
+      window.location.reload();
+
   } 
   /* here i am trying to show all images but it's so complicated i have reached that 
 i can show the image that i want or i choose it's index but all together still yet*/
@@ -114,6 +117,18 @@ i can show the image that i want or i choose it's index but all together still y
 
 // console.log(this.state.files)
         })
+        .catch(error => {
+          if(error.response.status==400){
+            window.alert("there is no images")
+            window.location.reload();
+          console.log(error.response)
+          }
+          else{
+            window.alert("there was an error")
+            window.location.reload();
+
+          }
+      });
   }
   
 
