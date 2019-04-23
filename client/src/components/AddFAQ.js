@@ -1,4 +1,5 @@
-import React , {Component} from 'react'
+import React , {Component} from 'react';
+import PropTypes from 'prop-types';
 
 export class AddFAQ extends Component{
     state = {
@@ -10,7 +11,8 @@ export class AddFAQ extends Component{
        this.setState({title:''});
     }
 
-    onChange = (e) => this.setState({title: e.target.value});
+    onChange = (e) => this.setState({[e.target.name]: e.target.value
+    });
 
 
     render(){
@@ -35,5 +37,9 @@ export class AddFAQ extends Component{
         )
     }
 }
+
+AddFAQ.propTypes ={
+    AddFAQ : PropTypes.func.isRequired
+  }
 
 export default AddFAQ

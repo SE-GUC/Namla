@@ -4,16 +4,13 @@ import './App.css';
 import Form from './components/Form.js';
 import Postrec from './components/Postrec';
 
-import { BrowserRouter as Router, Route ,Link} from 'react-router-dom'
+import { BrowserRouter as Router, Route ,Link} from 'react-router-dom';
 
 import Deleterec from './components/Deleterec';
 import Getrec from './components/Getrec';
 import Updaterec from './components/Updaterec';
-import CartCreate from './components/CartCreate'
-import DeleteCart from './components/DeleteCart';
-import Admingallery from './components/Admingallery';
-import Login from './components/Login';
-import Logout from './components/Logout';
+
+
 import Child from './components/child'
 import ProductDelete from './components/ProductDelete'
 import ProductGet from './components/ProductGet'
@@ -23,9 +20,10 @@ import Confmsg from './components/Confmsg'
 import Header from './components/Layout/Header';
 import Faqsection2 from './components/Faqsection2';
 import AddFAQ from './components/AddFAQ';
-import uuid from 'uuid';
+//import uuid from 'uuid';
+import Gallery from './components/Gallery';
 import EditFaq from './components/EditFaq'
-import Platform from './components/Layout/Platform'
+
 
 import RequestList from './components/RequestList';
 import RequestForm from './components/RequestForm';
@@ -40,35 +38,30 @@ import DeleteSuggestionBox from './components/SuggestionBoxDelete'
 import HeaderAnnoun from './components/Layout/HeaderAnnoun';
 import Announcements from './components/Announcements';
 import About from './components/pages/About';
+import axios from 'axios';
 
 
 class App extends Component {
   state = {
-    Faqsection2 : [
-      {
-        id:uuid.v4(),
-        title: 'Read the questions carefully.',
-        read:false
-      },
-      {
-        id:uuid.v4(),
-        title: 'Number of commities?  Answer:6',
-        read:false
-      },
-      {
-        id:uuid.v4(),
-        title: 'Working Hours?     Answer:8',
-        read: false
-      }
-    ]
+    Faqsection2 : []
+  }
+
+  componentDidMount() {
+    axios.get('http://localhost:5000/api/Faqsection2/')
+        .then(res => {
+            this.setState({faqsection: res.data.data}) 
+            
+           // console.log(res.data)
+         })  
   }
   
   AddFAQ = (title) => {
-    const newFaqsection2 = {
-      id :uuid.v4(),
-      title: title
-    }
-    this.setState({Faqsection2 : [...this.state.Faqsection2,newFaqsection2]});
+    axios.post('http://localhost:5000/api/Faqsection2/' , {
+    title,
+    read :false
+    } )
+    .then(res => this.setState({Faqsection2 : [...this.state.Faqsection2,res.data]}));
+    
   }
 
    markRead = (id) =>{
@@ -85,56 +78,69 @@ class App extends Component {
    }
 
    delFaqsection2 =(id) =>{
-     this.setState({ Faqsection2:[...this.state.Faqsection2.filter(Faqsection2 => Faqsection2.id 
-      !== id )] });
+    
+    axios.delete(`http://localhost:5000/api/Faqsection2/${id}`)
+    .then(res => this.setState({ Faqsection2:[...this.state.Faqsection2.filter(Faqsection2 => Faqsection2.id 
+      !== id )] }));
+
+     
    }
     
   render() {
     return (
       <Router>
-           <li>
-             <Link to="/Login">Admins</Link>
-           </li>
-           <Route exact path="/Login" component={Login}/>
-           <Route exact path="/Logout" component={Logout}/>
-           
+
       <div className="App">
-      <Platform/>
       <Faqsection />
       <EditFaq />
 
-          <Route exact path="/recform" component={Form}/>
-          <Route exact path="/recform" component={Postrec}/>
-          <Route exact path="/recform" component={Updaterec}/>
-          <Route exact path="/recform" component={Deleterec}/>
-          <Route exact path="/recform" component={Getrec}/>
-            <ul>
-               <li>
-                 <Link to="/recform">Recruitment Page</Link>
-               </li>
-            </ul>
-            <ul>
-            <li>
-             <Link to="/gallery">GALLERY</Link>
-           </li>
-           </ul>
-           <Route exact path="/gallery" component={Admingallery}/>
+        <Form onChange={fields => this.onChange(fields)}/>
+        <p>
+          {JSON.stringify(this.state.fields,null,2)}
+        </p>          
+
+        <Postrec/>
+        <Updaterec/>
+        <Deleterec/>
+        <Getrec/>
       
+  <Route exact path="/Gallery" component={Gallery}/>
+
+   
+     <ul>
+      <li>
+
+           <Link to="/Gallery">GALLERY</Link>
+          </li>
+          </ul>
 
       <div className="App">
       <Confmsg/>
       </div>
           <Route path="/child" component={Child}/>
+        
+        
+        
         <div className="App">
       <div className="container">
       <Header />
-      <AddFAQ AddFAQ={this.AddFAQ} />
 
-      <Faqsection2 Faqsection2={this.state.Faqsection2} markRead = {this.markRead} 
-       delFaqsection2 = {this.delFaqsection2}
-      />
+      <Route exact path="/" render = {props=>(
+        <React.Fragment>
+         <AddFAQ AddFAQ={this.AddFAQ} />
+ 
+         <Faqsection2 Faqsection2={this.state.Faqsection2} markRead = {this.markRead} 
+          delFaqsection2 = {this.delFaqsection2}/>
+
+        </React.Fragment>
+
+      )} />
+      <Route path="/about" component = {About}/>
+      
       </div>
       </div>
+      
+
       <ProductGet/>
       <ProductPost/>
       <ProductPut/>
@@ -142,7 +148,7 @@ class App extends Component {
       </div>
      <hr/>
   <Route path="/SkillsInMansheya">
-    <Header />
+
 
       <RequestList>Get all Requests for skills</RequestList>
 
@@ -155,9 +161,6 @@ class App extends Component {
       <ProfileForm>Create a new WorkshopOwner Profile</ProfileForm>
 
   </Route>
-
-  <Route exact path="/CartCreate" component={CartCreate}/>
-  <Route exact path="/DeleteCart" component={DeleteCart} />
 
   <Route exact path="/suggestionBox" component={SuggestionBox}/>
   <Route exact path="/createSuggestionBox" component={CreateSuggestionBox}/>
@@ -184,3 +187,5 @@ class App extends Component {
 }
 
 export default App;
+
+        
