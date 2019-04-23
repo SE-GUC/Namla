@@ -10,6 +10,9 @@ import Deleterec from './components/Deleterec';
 import Getrec from './components/Getrec';
 import Updaterec from './components/Updaterec';
 
+import CartCreate from './components/CartCreate'
+import DeleteCart from './components/DeleteCart'
+
 
 import Child from './components/child'
 import ProductDelete from './components/ProductDelete'
@@ -151,6 +154,9 @@ class App extends Component {
       <ProfileForm>Create a new WorkshopOwner Profile</ProfileForm>
 
   </Route>
+
+  <Route exact path="/CartCreate" component={CartCreate}/>
+  <Route exact path="/DeleteCart" component={DeleteCart} />
 
   <Route exact path="/suggestionBox" component={SuggestionBox}/>
   <Route exact path="/createSuggestionBox" component={CreateSuggestionBox}/>
