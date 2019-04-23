@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import AnnouncementItems from './AnnouncementItems';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import axios from 'axios';
 
 class Announcements extends Component {
@@ -99,9 +99,9 @@ class Announcements extends Component {
   }
 }
 
-Announcements.propTypes = {
-  announcements: PropTypes.array.isRequired,
-  delete: PropTypes.func.isRequired,
-}
+// Announcements.propTypes = {
+//   announcements: PropTypes.array.isRequired,
+//   delete: PropTypes.func.isRequired,
+// }
 
 export default Announcements;

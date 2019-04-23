@@ -7,6 +7,8 @@ const Grid = require("gridfs-stream");
 const fileType = require('file-type');
 const assert=require('assert');
 GridStore = require('mongodb').GridStore
+const passport = require('passport')
+
 
  const validator = require('../../validations/imageValidations')
 
@@ -19,7 +21,7 @@ const conn = mongoose.connection;
         gfs = Grid(conn.db);
 
 
-
+const headers=passport.authenticate('jwt', {session: false})
 
 
     router.get('/home', (req, res) => {
@@ -111,9 +113,10 @@ const conn = mongoose.connection;
 
  
  
-    router.delete('/delete/:id',(req,res)=>{
+    router.delete('/delete/:id',async (req,res)=>{
+        Headers:headers
     const imagename=req.params.id
-    gfs.files.find({filename:imagename}).toArray(function(err,files){
+    await gfs.files.find({filename:imagename}).toArray(function(err,files){
         if(err){
                     return res.status(400).send({message:'file not found'});
                 }
@@ -130,7 +133,8 @@ const conn = mongoose.connection;
 
 
 
-    router.post('/upload', (req, res) => {
+    router.post('/upload',(req, res) => {
+        Headers:headers
             let {
                 file
             } = req.files;
