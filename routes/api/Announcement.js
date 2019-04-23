@@ -14,7 +14,7 @@ router.get('/', async (req,res) => {
 
 // Create 
 router.post('/',passport.authenticate('jwt', {session: false}) ,async (req,res) => {
-    if(req.user ==NebnyAdmin){
+    if(req.user == NebnyAdmin){
     try {
     const isValidated = validator.createValidation(req.body)
     if (isValidated.error) return res.status(400).send({ error: isValidated.error.details[0].message })
@@ -31,7 +31,7 @@ router.post('/',passport.authenticate('jwt', {session: false}) ,async (req,res) 
 
 // Update 
 router.put('/:id',passport.authenticate('jwt', {session: false}) ,async (req,res) => {
-    if(req.user ==NebnyAdmin){
+    if(req.user == NebnyAdmin){
     try {
      const id = req.params.id
      const Ann = await Announcemenet.findByIdAndUpdate(id)
@@ -50,7 +50,7 @@ router.put('/:id',passport.authenticate('jwt', {session: false}) ,async (req,res
  })
 
  router.delete('/:id',passport.authenticate('jwt', {session: false}) ,async (req,res) =>  {
-    if(req.user ==NebnyAdmin){
+    if(req.user == NebnyAdmin){
     try {
      const id = req.params.id
      const deletedAnn = await Announcemenet.findByIdAndRemove(id)
