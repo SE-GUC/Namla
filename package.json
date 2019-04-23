@@ -30,6 +30,9 @@
     "passport-jwt": "^4.0.0",
     "react-dom": "^16.8.6",
     "react-notifications-component": "^1.1.1",
+    "react-redux": "^7.0.2",
+    "redux": "^4.0.1",
+    "redux-thunk": "^2.3.0",
     "uuid": "^3.3.2"
   },
   "devDependencies": {
