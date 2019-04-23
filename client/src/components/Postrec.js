@@ -5,6 +5,7 @@ import axios from 'axios'
 
 export class Postrec extends Component {
  state ={
+   id: "",
    ClientName:'',
    age:Number,
    address:'',
@@ -28,17 +29,20 @@ export class Postrec extends Component {
    InterviewTimeonChange (event){
      this.setState({InterviewTime: event.target.value});
    }
+   idonChange (event){
+    this.setState({id: event.target.value});
+    }
   
 
   onSubmit =event=>{
-    event.preventDefault();
+    //event.preventDefault();
    const ClientName=this.state.ClientName
    const age=this.state.age
    const address=this.state.address
    const InterviewDate=this.state.InterviewDate
    const InterviewTime=this.state.InterviewTime
     axios
-    .post('http://localhost:5000/api/RecruitmentForms/',({
+    .post(`http://localhost:5000/api/RecruitmentForms/${this.state.id}`,({
     ClientName: ClientName,
     age:age,
     address:address,
@@ -59,6 +63,7 @@ render() {
   <form >
   <div>
     <h1>Post Recruitment Form</h1>
+    <input type="text"  placeholder="UserID" value={this.state.value} style={{ flex: '10', padding: '5px' }} onChange={this.idonChange.bind(this)}/><br/>
     <input type="text"  placeholder="Post rec" value={this.state.value} style={{ flex: '10', padding: '5px' }} onChange={this.clientnameonChange.bind(this)}/><br/>
     <input type="text"  placeholder="age"   value={this.state.value} style={{ flex: '10', padding: '5px' }} onChange={this.ageonChange.bind(this)}/><br/>      
     <input type="text"  placeholder="address" value={this.state.value} style={{ flex: '10', padding: '5px' }} onChange={this.addressonchange.bind(this)}/><br/>      

@@ -11,6 +11,11 @@ import Getrec from './components/Getrec';
 import Updaterec from './components/Updaterec';
 
 import Team from './components/team'
+import CartCreate from './components/CartCreate'
+import DeleteCart from './components/DeleteCart';
+import Admingallery from './components/Admingallery';
+import Login from './components/Login';
+import Logout from './components/Logout';
 import Child from './components/child'
 import ProductDelete from './components/ProductDelete'
 import ProductGet from './components/ProductGet'
@@ -21,9 +26,8 @@ import Header from './components/Layout/Header';
 import Faqsection2 from './components/Faqsection2';
 import AddFAQ from './components/AddFAQ';
 import uuid from 'uuid';
-import Gallery from './components/Gallery';
 import EditFaq from './components/EditFaq'
-
+import Platform from './components/Layout/Platform'
 
 import RequestList from './components/RequestList';
 import RequestForm from './components/RequestForm';
@@ -90,34 +94,38 @@ class App extends Component {
   render() {
     return (
       <Router>
-
+           <li>
+             <Link to="/Login">Admins</Link>
+           </li>
+           <Route exact path="/Login" component={Login}/>
+           <Route exact path="/Logout" component={Logout}/>
+           
       <div className="App">
       </div>
           <Route path="/team" component={Team}/>
         <div className="App">
 
+      <Platform/>
       <Faqsection />
       <EditFaq />
 
-        <Form onChange={fields => this.onChange(fields)}/>
-        <p>
-          {JSON.stringify(this.state.fields,null,2)}
-        </p>          
-
-        <Postrec/>
-        <Updaterec/>
-        <Deleterec/>
-        <Getrec/>
+          <Route exact path="/recform" component={Form}/>
+          <Route exact path="/recform" component={Postrec}/>
+          <Route exact path="/recform" component={Updaterec}/>
+          <Route exact path="/recform" component={Deleterec}/>
+          <Route exact path="/recform" component={Getrec}/>
+            <ul>
+               <li>
+                 <Link to="/recform">Recruitment Page</Link>
+               </li>
+            </ul>
+            <ul>
+            <li>
+             <Link to="/gallery">GALLERY</Link>
+           </li>
+           </ul>
+           <Route exact path="/gallery" component={Admingallery}/>
       
-  <Route exact path="/Gallery" component={Gallery}/>
-
-   
-     <ul>
-      <li>
-
-           <Link to="/Gallery">GALLERY</Link>
-          </li>
-          </ul>
 
       <div className="App">
       <Confmsg/>
@@ -150,6 +158,9 @@ class App extends Component {
       <ProfileForm>Create a new WorkshopOwner Profile</ProfileForm>
 
   </Route>
+
+  <Route exact path="/CartCreate" component={CartCreate}/>
+  <Route exact path="/DeleteCart" component={DeleteCart} />
 
   <Route exact path="/suggestionBox" component={SuggestionBox}/>
   <Route exact path="/createSuggestionBox" component={CreateSuggestionBox}/>
