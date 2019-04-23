@@ -51,4 +51,4 @@ Faqsectionitem.propTypes ={
   }
 
  
-export default Faqsectionitem;
+export default Faqsectionitem; 

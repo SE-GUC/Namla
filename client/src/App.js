@@ -68,7 +68,7 @@ class App extends Component {
      this.setState( { Faqsection2: this.state.Faqsection2.map( Faqsection2 => {
      if(Faqsection2.id == id){
        Faqsection2.read = !Faqsection2.read
-
+ 
      }  
 
      return Faqsection2;

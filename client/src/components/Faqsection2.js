@@ -23,4 +23,4 @@ Faqsection2.propTypes ={
   delFaqsection2 : PropTypes.func.isRequired
 }
 
-export default Faqsection2;
+export default Faqsection2; 
