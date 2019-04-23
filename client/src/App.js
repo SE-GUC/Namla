@@ -9,11 +9,11 @@ import { BrowserRouter as Router, Route ,Link} from 'react-router-dom'
 import Deleterec from './components/Deleterec';
 import Getrec from './components/Getrec';
 import Updaterec from './components/Updaterec';
-
 import CartCreate from './components/CartCreate'
-import DeleteCart from './components/DeleteCart'
-
-
+import DeleteCart from './components/DeleteCart';
+import Admingallery from './components/Admingallery';
+import Login from './components/Login';
+import Logout from './components/Logout';
 import Child from './components/child'
 import ProductDelete from './components/ProductDelete'
 import ProductGet from './components/ProductGet'
@@ -24,7 +24,6 @@ import Header from './components/Layout/Header';
 import Faqsection2 from './components/Faqsection2';
 import AddFAQ from './components/AddFAQ';
 import uuid from 'uuid';
-import Gallery from './components/Gallery';
 import EditFaq from './components/EditFaq'
 import Platform from './components/Layout/Platform'
 
@@ -93,7 +92,12 @@ class App extends Component {
   render() {
     return (
       <Router>
-
+           <li>
+             <Link to="/Login">Admins</Link>
+           </li>
+           <Route exact path="/Login" component={Login}/>
+           <Route exact path="/Logout" component={Logout}/>
+           
       <div className="App">
       <Platform/>
       <Faqsection />
@@ -109,16 +113,13 @@ class App extends Component {
                  <Link to="/recform">Recruitment Page</Link>
                </li>
             </ul>
+            <ul>
+            <li>
+             <Link to="/gallery">GALLERY</Link>
+           </li>
+           </ul>
+           <Route exact path="/gallery" component={Admingallery}/>
       
-  <Route exact path="/Gallery" component={Gallery}/>
-
-   
-     <ul>
-      <li>
-
-           <Link to="/Gallery">GALLERY</Link>
-          </li>
-          </ul>
 
       <div className="App">
       <Confmsg/>

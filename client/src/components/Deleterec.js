@@ -15,10 +15,8 @@ export class Deleterec extends Component {
 
   onSubmit =event=>{
    // event.preventDefault();
-   const id=this.state.id
     axios
     .delete(`http://localhost:5000/api/RecruitmentForms/${this.state.id}`,({
-    //id: id 
   }))
     .then(res => {
       //console.log(res);

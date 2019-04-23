@@ -15,7 +15,6 @@ export class DeleteCart extends Component {
 
   onSubmit =event=>{
    
-   const id=this.state.id
     axios
     .delete(`http://localhost:5000/api/Cart/${this.state.id}`,({
     //id: id 
