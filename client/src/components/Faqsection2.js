@@ -18,7 +18,9 @@ class Faqsection2 extends Component {
 }
 
 Faqsection2.propTypes ={
-  Faqsection2 : PropTypes.array.isRequired
+  Faqsection2 : PropTypes.array.isRequired,
+  markRead : PropTypes.func.isRequired,
+  delFaqsection2 : PropTypes.func.isRequired
 }
 
-export default Faqsection2;
+export default Faqsection2; 
