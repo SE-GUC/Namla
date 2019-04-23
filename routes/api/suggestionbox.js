@@ -12,7 +12,7 @@ router.get('/', async (req,res) => {
 
 
 // Create a suggestionbox 
-router.post('/', async (req,res) => {
+router.post('/', passport.authenticate('jwt', {session: false}),async (req,res) => {
    try {
     const isValidated = validator.createValidation(req.body)
     if (isValidated.error) return res.status(400).send({ error: isValidated.error.details[0].message })
@@ -26,13 +26,13 @@ router.post('/', async (req,res) => {
 })
 
 // Update a suggestionbox
-router.put('/:id', async (req,res) => {
+router.put('/:id', passport.authenticate('jwt', {session: false}),async (req,res) => {
     try {
      const id = req.params.id
      const subox = await sbox.findById(id)
-    //  if(!subox) return res.status(404).send({error: 'suggestion box does not exist'})
-    //  const isValidated = validator.updateValidation(req.body)
-    //  if (isValidated.error) return res.status(400).send({ error: isValidated.error.details[0].message })
+     if(!subox) return res.status(404).send({error: 'suggestion box does not exist'})
+     const isValidated = validator.updateValidation(req.body)
+     if (isValidated.error) return res.status(400).send({ error: isValidated.error.details[0].message })
      const updatedSuggestionbox = await sbox.findByIdAndUpdate(id,req.body)
      res.json({msg: ' suggestion box updated successfully',updatedSuggestionbox})
     }
@@ -42,7 +42,7 @@ router.put('/:id', async (req,res) => {
     }  
  })
 
- router.delete('/:id', async (req,res) => {
+ router.delete('/:id',passport.authenticate('jwt', {session: false}),async (req,res) => {
     try {
      const id = req.params.id
      const deletedSuggestion = await sbox.findByIdAndRemove(id)
