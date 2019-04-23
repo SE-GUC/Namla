@@ -1,6 +1,8 @@
 const express = require('express')
 const router = express.Router()
 const mongoose = require('mongoose')
+const passport = require('passport')
+
 
 const Announcemenet = require('../../models/Announcement')
 const validator = require('../../validations/AnnoValidations')

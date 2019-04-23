@@ -54,6 +54,8 @@ export class Admingallery extends Component {
     axios
     .post('http://localhost:5000/api/gallery/upload',fd,{Header:headers})
     .then(res=>{
+      window.location.reload();
+
       console.log(res.data.message);}
     ,(err)=>{
       console.log(err.message);}
