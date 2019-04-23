@@ -3,18 +3,17 @@ import axios from 'axios'
 
 class Child extends Component {
 
-    constructor(){
-        super()
+    constructor(props){
+        super(props)
         this.state = {
-            children: [],
-            id:"", team:"", name:"", age:0, familyStatus:"", educationalLevel:"" ,
-            url:"http://localhost:3000/api/teams/",
-            button:"Add Child",
-            show:false
+            child: { _id:"", team:"", name:"", age:0, familyStatus:"", educationalLevel:"" },
+            id:"", team:"", name:"", age:0, familyStatus:"", educationalLevel:"",
+            url:"http://localhost:5000/api/teams/",
+            show:false,
+            edit:false,
+            button:"Show"
         }
-        this.getChildren = this.getChildren.bind(this)
-        // this.getChild = this.getChild.bind(this)
-        this.createChild = this.createChild.bind(this)
+        this.getChild(this.props.id)
         this.updateChild = this.updateChild.bind(this)
         this.deleteChild = this.deleteChild.bind(this)
         this.onValueChange = this.onValueChange.bind(this)
@@ -22,26 +21,10 @@ class Child extends Component {
         this.show = this.show.bind(this)
     }
 
-    getChildren() {
-        axios.get(this.state.url)
-        .then( response => {this.setState({ children:response.data }) })
+    getChild(id) {
+        axios.get(this.state.url+id)
+        .then( response => { this.setState({ child:response.data}) })
         .catch( err => { console.log(err) })
-    }
-
-    // getChild(id) {
-    //     axios.get(this.state.url+id)
-    //     .then( response => { this.setState({ child:response.data}) })
-    //     .catch( err => { console.log(err) })
-    // }
-
-    createChild() {
-        axios.post(this.state.url, {
-            team:this.state.team,
-            name:this.state.name,
-            age:this.state.age,
-            familyStatus:this.state.familyStatus,
-            educationalLevel:this.state.educationalLevel
-        })
     }
 
     updateChild() {
@@ -52,12 +35,12 @@ class Child extends Component {
             familyStatus:this.state.familyStatus,
             educationalLevel:this.state.educationalLevel
         })
+        this.setState({ edit:false })
     }
 
     deleteChild(id) {
-        if (id) {
-            axios.delete(this.state.url+id)
-        }
+        axios.delete(this.state.url+id)
+        window.location.reload()
     }
 
     onValueChange(event) {
@@ -65,60 +48,47 @@ class Child extends Component {
     }
 
     showFields(child) {
-        this.setState({ button:"Update Child", id:child._id, team:child.team, name:child.name, 
+        this.setState({ edit:true, id:child._id, team:child.team, name:child.name, 
         age:child.age, familyStatus:child.familyStatus, educationalLevel:child.educationalLevel })
     }
 
     show() {
-        this.setState({ show:true })
-    }
-
-    mapper(child) {
-        return (
-            <div>
-                Name : { child.name }
-                { this.state.show && 
-                <p> Team : { child.team } - Age : { child.age } - Family Status : { child.familyStatus } - 
-                Educational Level : { child.educationalLevel } </p>}
-                <button onClick={ () => this.show() } >
-                Show
-                </button>
-                <button onClick={ () => this.deleteChild(child._id) }>
-                Delete
-                </button>
-                <button onClick={ () => this.showFields(child) }>
-                Edit
-                </button>
-            </div>
-        )
+        if (this.state.show){
+            this.setState({ show:false, button:"Show" })
+        } else {
+            this.setState({ show:true, button:"Hide" })
+        }
     }
 
     render () {
         return (
             <div className="Child">
-                <button onClick={ () => this.getChildren() } >
-                Children
-                </button>
-                <br/>
-                    { this.state.children.map( (child) => {
-                        return <div> {this.mapper(child)} </div> 
-                    })}
-                <div>
-                    Team<input type="text" value={this.state.team} name="team" onChange={this.onValueChange}/><br/>
-                    Name<input type="text" value={this.state.name} name="name" onChange={this.onValueChange}/><br/>
-                    Age<input type="text" value={this.state.age} name="age" onChange={this.onValueChange}/><br/>
-                    Family Status<input type="text" value={this.state.familyStatus} name="familyStatus" onChange={this.onValueChange}/><br/>
-                    Educational Level<input type="text" value={this.state.educationalLevel} name="educationalLevel" onChange={this.onValueChange}/><br/>
-                    <button onClick={ () => {
-                        if (this.state.button==="Add Child") {
-                            this.createChild() 
-                        } else { 
-                                this.updateChild()
-                             }
-                        }}>
+                { !this.state.edit &&
+                <div style={{backgroundColor:'#483D8B', padding:'10px'}}>
+                    Name : { this.state.child.name }
+                    { this.state.show && 
+                    <p> Team : { this.state.child.team } - Age : { this.state.child.age } - 
+                    Family Status : { this.state.child.familyStatus } - Educational Level : { this.state.child.educationalLevel } </p>}
+                    <button onClick={ () => this.show() } >
                     {this.state.button}
                     </button>
-                </div>
+                    <button onClick={ () => this.deleteChild(this.state.child._id) }>
+                    Delete
+                    </button>
+                    <button onClick={ () => this.showFields(this.state.child) }>
+                    Edit
+                    </button>
+                </div>}
+                { this.state.edit &&
+                <div style={{backgroundColor:'#FA8072', padding:'10px'}}>
+                    Name<input type="text" value={this.state.name} name="name" onChange={this.onValueChange}/>
+                    Age<input type="number" value={this.state.age} name="age" onChange={this.onValueChange}/>
+                    Family Status<input type="text" value={this.state.familyStatus} name="familyStatus" onChange={this.onValueChange}/>
+                    Educational Level<input type="text" value={this.state.educationalLevel} name="educationalLevel" onChange={this.onValueChange}/>
+                    <button onClick={ () => { this.updateChild() }}>
+                    Update Child
+                    </button>
+                </div>}
             </div>
         )
     }
