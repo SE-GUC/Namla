@@ -16,7 +16,6 @@ import DeleteCart from './components/DeleteCart';
 import Admingallery from './components/Admingallery';
 import Login from './components/Login';
 import Logout from './components/Logout';
-import Child from './components/child'
 import ProductDelete from './components/ProductDelete'
 import ProductGet from './components/ProductGet'
 import ProductPost from './components/ProductPost'
