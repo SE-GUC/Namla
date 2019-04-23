@@ -57,7 +57,6 @@ router.put('/update/:id1/:id', async (req,res) => {
      res.json({msg: 'Form updated successfully'})
     }
     catch(error) {
-        // We will be handling the error later
         console.log(error)
     }  
  })
