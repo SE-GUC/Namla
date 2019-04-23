@@ -38,7 +38,7 @@ const gallery = require('./routes/api/gallery')
 const db = require('./config/keys').mongoURI
 
 mongoose
-    .connect('mongodb://localhost:27017/namla')
+    .connect(db)
     .then(() => console.log('Connected to MongoDB'))
     .catch(err => console.log(err))
 
