@@ -4,7 +4,7 @@ import './App.css';
 import Form from './components/Form.js';
 import Postrec from './components/Postrec';
 
-import { BrowserRouter as Router, Route ,Link} from 'react-router-dom'
+import { BrowserRouter as Router, Route ,Link} from 'react-router-dom';
 
 import Deleterec from './components/Deleterec';
 import Getrec from './components/Getrec';
@@ -20,7 +20,7 @@ import Confmsg from './components/Confmsg'
 import Header from './components/Layout/Header';
 import Faqsection2 from './components/Faqsection2';
 import AddFAQ from './components/AddFAQ';
-import uuid from 'uuid';
+//import uuid from 'uuid';
 import Gallery from './components/Gallery';
 import EditFaq from './components/EditFaq'
 
@@ -38,35 +38,30 @@ import DeleteSuggestionBox from './components/SuggestionBoxDelete'
 import HeaderAnnoun from './components/Layout/HeaderAnnoun';
 import Announcements from './components/Announcements';
 import About from './components/pages/About';
+import axios from 'axios';
 
 
 class App extends Component {
   state = {
-    Faqsection2 : [
-      {
-        id:uuid.v4(),
-        title: 'Read the questions carefully.',
-        read:false
-      },
-      {
-        id:uuid.v4(),
-        title: 'Number of commities?  Answer:6',
-        read:false
-      },
-      {
-        id:uuid.v4(),
-        title: 'Working Hours?     Answer:8',
-        read: false
-      }
-    ]
+    Faqsection2 : []
+  }
+
+  componentDidMount() {
+    axios.get('http://localhost:5000/api/Faqsection2/')
+        .then(res => {
+            this.setState({faqsection: res.data.data}) 
+            
+           // console.log(res.data)
+         })  
   }
   
   AddFAQ = (title) => {
-    const newFaqsection2 = {
-      id :uuid.v4(),
-      title: title
-    }
-    this.setState({Faqsection2 : [...this.state.Faqsection2,newFaqsection2]});
+    axios.post('http://localhost:5000/api/Faqsection2/' , {
+    title,
+    read :false
+    } )
+    .then(res => this.setState({Faqsection2 : [...this.state.Faqsection2,res.data]}));
+    
   }
 
    markRead = (id) =>{
@@ -83,8 +78,12 @@ class App extends Component {
    }
 
    delFaqsection2 =(id) =>{
-     this.setState({ Faqsection2:[...this.state.Faqsection2.filter(Faqsection2 => Faqsection2.id 
-      !== id )] });
+    
+    axios.delete(`http://localhost:5000/api/Faqsection2/${id}`)
+    .then(res => this.setState({ Faqsection2:[...this.state.Faqsection2.filter(Faqsection2 => Faqsection2.id 
+      !== id )] }));
+
+     
    }
     
   render() {
@@ -119,16 +118,29 @@ class App extends Component {
       <Confmsg/>
       </div>
           <Route path="/child" component={Child}/>
+        
+        
+        
         <div className="App">
       <div className="container">
       <Header />
-      <AddFAQ AddFAQ={this.AddFAQ} />
 
-      <Faqsection2 Faqsection2={this.state.Faqsection2} markRead = {this.markRead} 
-       delFaqsection2 = {this.delFaqsection2}
-      />
+      <Route exact path="/" render = {props=>(
+        <React.Fragment>
+         <AddFAQ AddFAQ={this.AddFAQ} />
+ 
+         <Faqsection2 Faqsection2={this.state.Faqsection2} markRead = {this.markRead} 
+          delFaqsection2 = {this.delFaqsection2}/>
+
+        </React.Fragment>
+
+      )} />
+      <Route path="/about" component = {About}/>
+      
       </div>
       </div>
+      
+
       <ProductGet/>
       <ProductPost/>
       <ProductPut/>
@@ -136,7 +148,7 @@ class App extends Component {
       </div>
      <hr/>
   <Route path="/SkillsInMansheya">
-    <Header />
+
 
       <RequestList>Get all Requests for skills</RequestList>
 

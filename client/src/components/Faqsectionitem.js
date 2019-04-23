@@ -35,7 +35,9 @@ export class Faqsectionitem extends Component{
 }
 
 Faqsectionitem.propTypes ={
-    Faqsection2 : PropTypes.object.isRequired
+    Faqsection2 : PropTypes.object.isRequired,
+    markRead : PropTypes.func.isRequired,
+  delFaqsection2 : PropTypes.func.isRequired
   }
 
   const btnStyle = {

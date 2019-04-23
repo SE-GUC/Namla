@@ -30,6 +30,7 @@
     "passport-jwt": "^4.0.0",
     "react-dom": "^16.8.6",
     "react-notifications-component": "^1.1.1",
+    "react-router-dom": "^5.0.0",
     "uuid": "^3.3.2"
   },
   "devDependencies": {
