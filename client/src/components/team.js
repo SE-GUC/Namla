@@ -139,17 +139,6 @@ class Team extends Component {
         )
     }
 
-    childMapper(child) {
-        return (
-            <div>
-                <Child id={child}></Child> 
-                <button onClick={ () => this.removeChild(child) } >
-                Remove
-                </button>
-            </div>    
-        )
-    }
-
     teamMapper(team) {
         return (
             <div>
@@ -162,7 +151,7 @@ class Team extends Component {
                 </button>
                 </div>
                 Children{ team.children.map( (child) => {
-                        return <div key={child}> {this.childMapper(child)} </div>
+                        return <div key={child}> <Child id={child}></Child></div>
                     })}
             </div>
         )
